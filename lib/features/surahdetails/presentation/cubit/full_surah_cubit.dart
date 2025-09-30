@@ -18,13 +18,15 @@ class FullSurahCubit extends Cubit<FullSurahState> {
       emit(FullSurahLoading());
       final json = await api.get("api/$surahNum.json");
       fullSurahModel = FullSurahModel.fromJson(json);
-      if (surahNum / ~100.toInt() == 0) {
-        numToSend = surahNum.toString();
-      } else if (surahNum / ~10.toInt() == 0) {
+
+      if (surahNum ~/ 10.toInt() == 0) {
+        numToSend = "00$surahNum";
+      } else if (surahNum ~/ 100.toInt() == 0) {
         numToSend = '0$surahNum';
       } else {
-        numToSend = "00$surahNum";
+        numToSend = "$surahNum";
       }
+
       fullSurahModel!.mashaih.add(
         ShekModel(
           name: "Saud El shorem",

@@ -245,8 +245,18 @@ class _PlayerViewState extends State<PlayerView> {
                               },
                             ),
                           ),
-                        ).then((value) {
+                        ).then((value) async {
                           audioUrl = value;
+                          await context.read<AudioPlayerCubit>().playAudio(
+                            audioUrl!,
+                          );
+                          duration =
+                              await context
+                                  .read<AudioPlayerCubit>()
+                                  .player
+                                  .getDuration() ??
+                              Duration(seconds: 2);
+                          isPlaying = true;
                           print(value);
                           setState(() {});
                         });
