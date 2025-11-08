@@ -28,7 +28,7 @@ class TimeScreenLeading extends StatelessWidget {
                 ),
               ),
               Text(
-                context.read<LocationCubit>().loction.toString(),
+                context.read<LocationCubit>().loction.toString().split(' ')[0],
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: FontsGuid.poppins,

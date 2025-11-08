@@ -29,7 +29,7 @@ class HeadScreen extends StatelessWidget {
                 ),
                 Image.asset(
                   "assets/images/image 4.png",
-                  width: ScreenSize.width * 0.552,
+                  width: ScreenSize.width * 0.54,
                   height: ScreenSize.hight * 0.3,
                   fit: BoxFit.cover,
                 ),
@@ -48,7 +48,7 @@ class HeadScreen extends StatelessWidget {
                       "My Quran",
                       style: TextStyle(
                         color: ColorGuid.mainColor,
-                        fontSize: ScreenSize.hight * 0.0365,
+                        fontSize: ScreenSize.hight * 0.03,
                         fontWeight: FontWeight.bold,
                         fontFamily: FontsGuid.poppins,
                       ),
@@ -58,7 +58,7 @@ class HeadScreen extends StatelessWidget {
                       style: TextStyle(
                         color: Colors.black,
                         fontFamily: FontsGuid.poppins,
-                        fontSize: ScreenSize.hight * 0.02,
+                        fontSize: ScreenSize.hight * 0.017,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
@@ -68,14 +68,14 @@ class HeadScreen extends StatelessWidget {
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
                         fontFamily: FontsGuid.poppins,
-                        fontSize: ScreenSize.hight * 0.055,
+                        fontSize: ScreenSize.hight * 0.05,
                       ),
                     ),
                     Text(
                       '${context.read<NextprayCubit>().nextdayModel!.month},${context.read<NextprayCubit>().nextdayModel!.date.split('-')[1]}-${context.read<NextprayCubit>().nextdayModel!.date.split('-')[2]}',
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: ScreenSize.hight * 0.015,
+                        fontSize: ScreenSize.hight * 0.012,
                         fontWeight: FontWeight.bold,
                         fontFamily: FontsGuid.poppins,
                       ),

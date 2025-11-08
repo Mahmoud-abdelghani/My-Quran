@@ -19,6 +19,8 @@ class CustomKategoryButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: ontap,
       style: ElevatedButton.styleFrom(
+        shadowColor: ColorGuid.mainColor,
+        elevation: 10,
         shape: RoundedRectangleBorder(
           side: BorderSide(color: ColorGuid.mainColor),
         ),

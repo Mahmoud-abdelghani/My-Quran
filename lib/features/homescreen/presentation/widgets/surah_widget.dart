@@ -13,13 +13,14 @@ class SurahWidget extends StatelessWidget {
     required this.ayat,
     required this.nameInArabic,
     required this.place,
-    required this.num,
+    required this.num, required this.onTap,
   });
   final String title;
   final String place;
   final String ayat;
   final String nameInArabic;
   final int num;
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -29,10 +30,7 @@ class SurahWidget extends StatelessWidget {
       child: ListTile(
         minVerticalPadding: ScreenSize.hight * 0.01,
 
-        onTap: () {
-          BlocProvider.of<FullSurahCubit>(context).getFullSurah(num);
-          Navigator.pushNamed(context, SurahView.routeName);
-        },
+        onTap: onTap,
         tileColor: Colors.white,
 
         title: Text(
@@ -44,7 +42,7 @@ class SurahWidget extends StatelessWidget {
           children: [
             Image.asset(
               "assets/images/muslim (1) 1.png",
-              width: ScreenSize.width * 0.08,
+              width: ScreenSize.width * 0.12,
               height: ScreenSize.hight * 0.1,
               fit: BoxFit.fill,
             ),

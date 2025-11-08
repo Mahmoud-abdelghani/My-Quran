@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran/core/utils/screen_size.dart';
 import 'package:quran/features/homescreen/presentation/cubit/quran_cubit.dart';
 import 'package:quran/features/homescreen/presentation/widgets/surah_widget.dart';
+import 'package:quran/features/surahdetails/presentation/cubit/full_surah_cubit.dart';
+import 'package:quran/features/surahdetails/presentation/pages/surah_view.dart';
 
 class SuratWidget extends StatelessWidget {
   const SuratWidget({super.key});
@@ -17,6 +19,10 @@ class SuratWidget extends StatelessWidget {
           return Expanded(
             child: ListView.separated(
               itemBuilder: (context, index) => SurahWidget(
+                onTap: () {
+          BlocProvider.of<FullSurahCubit>(context).getFullSurah(index+1);
+          Navigator.pushNamed(context, SurahView.routeName);
+        },
                 num: index + 1,
                 title: context.read<QuranCubit>().surs[index].nameInEn,
                 ayat: context.read<QuranCubit>().surs[index].ayatnum.toString(),

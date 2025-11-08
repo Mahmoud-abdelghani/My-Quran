@@ -12,6 +12,9 @@ class EndPoints {
   static const String baseUrlAzkar =
       "https://ahegazy.github.io/muslimKit/json/";
   static const String surah = "api/112.json";
+  static const String baseUrlTafseer = "http://api.quran-tafseer.com/";
+  static const String fetchTafsserTypes = "tafseer/";
+  static const String fetchAyaTafseer = "quran/";
 }
 
 class apiKeys {
@@ -37,4 +40,11 @@ class apiKeys {
   static const String arabic1 = "arabic1";
   static const String english = "english";
   static const String audio = "audio";
+  static const String id = "id";
+  static const String name = "name";
+  static const String language = "language";
+  static const String bookName = "book_name";
+  static const String author = 'author';
+  static const String ayahNumber = "ayah_number";
+  static const text = 'text';
 }

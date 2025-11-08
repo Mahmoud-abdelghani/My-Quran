@@ -13,6 +13,7 @@ class NextprayCubit extends Cubit<NextprayState> {
   ApiConcumer api;
   NextdayModel? nextdayModel;
   getTheNext({required String address}) async {
+    address = address == "مصر" ? "egypt" : "egypt";
     try {
       emit(NextprayLoading());
       final json = await api.get(

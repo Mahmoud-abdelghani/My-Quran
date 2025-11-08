@@ -12,6 +12,7 @@ import 'package:quran/features/homescreen/presentation/widgets/custom_kategory_b
 import 'package:quran/features/homescreen/presentation/widgets/head_screen.dart';
 import 'package:quran/features/homescreen/presentation/widgets/surah_widget.dart';
 import 'package:quran/features/homescreen/presentation/widgets/surat_widget.dart';
+import 'package:quran/features/homescreen/presentation/widgets/tafser_widget.dart';
 import 'package:quran/features/surahdetails/presentation/cubit/audio_player_cubit.dart';
 
 class HomeView extends StatefulWidget {
@@ -26,8 +27,13 @@ class _HomeViewState extends State<HomeView> {
   bool quranSelected = true;
   bool azkarSelected = false;
 
-  List<bool> buttonsStates = [true, false, false];
-  List<String> buttonsTexts = ['Surat', 'Azkar S', 'Azkar M'];
+  List<bool> buttonsStates = [true, false, false, false];
+  List<String> buttonsTexts = [
+    'السُّوَرُ',
+    'التَّفْسِيرُ',
+    'أذْكَارُ الصَّبَاحِ',
+    'أَذْكَارُ الْمَسَاءِ',
+  ];
   @override
   Widget build(BuildContext context) {
     ScreenSize.init(context);
@@ -55,27 +61,19 @@ class _HomeViewState extends State<HomeView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 HeadScreen(),
-                Text(
-                  "Kategori",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: ScreenSize.hight * 0.036,
-                    fontFamily: FontsGuid.poppins,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                SizedBox(height: ScreenSize.hight * .02),
                 SizedBox(
                   width: ScreenSize.width,
-                  height: ScreenSize.hight * 0.05,
+                  height: ScreenSize.hight * 0.06,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 3,
+                    itemCount: buttonsTexts.length,
                     separatorBuilder: (context, index) =>
                         SizedBox(width: ScreenSize.width * 0.1),
                     itemBuilder: (context, index) => CustomKategoryButton(
                       ontap: () {
                         setState(() {
-                          buttonsStates = [false, false, false];
+                          buttonsStates = [false, false, false, false];
                           buttonsStates[index] = true;
                         });
                       },
@@ -85,8 +83,9 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ),
                 if (buttonsStates.elementAt(0)) SuratWidget(),
-                if (buttonsStates.elementAt(1)) AzkarSWidget(),
-                if (buttonsStates.elementAt(2)) AzkarMWidget(),
+                if (buttonsStates.elementAt(1)) TafserWidget(),
+                if (buttonsStates.elementAt(2)) AzkarSWidget(),
+                if (buttonsStates.elementAt(3)) AzkarMWidget(),
               ],
             ),
           ),

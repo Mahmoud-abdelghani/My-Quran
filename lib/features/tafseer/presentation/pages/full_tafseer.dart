@@ -1,42 +1,33 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:just_audio/just_audio.dart' hide AudioPlayer;
 import 'package:quran/core/utils/color_guid.dart';
 import 'package:quran/core/utils/fonts_guid.dart';
 import 'package:quran/core/utils/screen_size.dart';
-
-import 'package:quran/features/homescreen/presentation/cubit/quran_cubit.dart';
-import 'package:quran/features/surahdetails/presentation/cubit/full_surah_cubit.dart';
-import 'package:quran/features/surahdetails/presentation/pages/player_view.dart';
+import 'package:quran/features/homescreen/presentation/cubit/tafseer_cubit.dart';
 import 'package:quran/features/surahdetails/presentation/widgets/aya_widget.dart';
+import 'package:quran/features/tafseer/data/models/aya_tafseer.dart';
+import 'package:quran/features/tafseer/presentation/cubit/get_tafseer_cubit.dart';
 
-class SurahView extends StatefulWidget {
-  const SurahView({super.key});
-  static const routeName = "surahView";
-
+class FullTafseer extends StatefulWidget {
+  const FullTafseer({super.key});
+  static const String routeName = 'fullTafseer';
   @override
-  State<SurahView> createState() => _SurahViewState();
+  State<FullTafseer> createState() => _FullTafseerState();
 }
 
-class _SurahViewState extends State<SurahView> {
-  AudioPlayer player = AudioPlayer();
-
-  bool isPlaying = false;
+class _FullTafseerState extends State<FullTafseer> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FullSurahCubit, FullSurahState>(
+    Map<String, String> argu =
+        ModalRoute.of(context)!.settings.arguments as Map<String, String>;
+
+    return BlocBuilder<GetTafseerCubit, GetTafseerState>(
       builder: (context, state) {
-        if (state is FullSurahLoading) {
+        if (state is GetTafseerLoading) {
           return Scaffold(body: Center(child: CircularProgressIndicator()));
-        } else if (state is FullSurahSuccess) {
+        } else if (state is GetTafseerSuccess) {
+          List<AyaTafseer> show = state.tafseerOfAyats.reversed.toList();
           return Scaffold(
-            floatingActionButton: FloatingActionButton(
-              child: isPlaying ? Icon(Icons.pause) : Icon(Icons.play_arrow),
-              onPressed: () async {
-                Navigator.pushNamed(context, PlayerView.routeName);
-              },
-            ),
             backgroundColor: Colors.white,
             body: CustomScrollView(
               slivers: [
@@ -47,7 +38,7 @@ class _SurahViewState extends State<SurahView> {
                       left: ScreenSize.width * 0.146,
                     ),
                     child: Text(
-                      state.fullSurahModel.name,
+                      argu['name']!,
                       style: TextStyle(
                         color: ColorGuid.mainColor,
                         fontSize: ScreenSize.hight * 0.05,
@@ -61,7 +52,7 @@ class _SurahViewState extends State<SurahView> {
                   child: Padding(
                     padding: EdgeInsets.only(left: ScreenSize.width * 0.146),
                     child: Text(
-                      state.fullSurahModel.translation,
+                      argu['place']!,
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: ScreenSize.hight * 0.03,
@@ -100,23 +91,23 @@ class _SurahViewState extends State<SurahView> {
                   ),
                 ),
                 SliverList.separated(
+                  itemBuilder: (context, index) => AyaWidget(
+                    tafseer: true,
+                    ayaAr: show[index].aya,
+                    ayaEn: show[index].text,
+                    num: int.parse(show[index].ayaNum),
+                  ),
                   separatorBuilder: (context, index) =>
                       SizedBox(height: ScreenSize.hight * 0.05),
-                  itemBuilder: (context, index) => AyaWidget(
-                    tafseer: false,
-                    num: index + 1,
-                    ayaAr: state.fullSurahModel.ayatInAr[index],
-                    ayaEn: state.fullSurahModel.ayatInEn[index],
-                  ),
-                  itemCount: state.fullSurahModel.ayatInAr.length,
+                  itemCount: state.tafseerOfAyats.length,
                 ),
               ],
             ),
           );
-        } else if (state is FullSurahconnectionError) {
-          return Scaffold(body: Text(state.message));
+        } else if (state is GetTafseerError) {
+          return Scaffold(body: Text('error'));
         } else {
-          return Scaffold(body: Text("error while loading"));
+          return Scaffold(body: Text('error'));
         }
       },
     );

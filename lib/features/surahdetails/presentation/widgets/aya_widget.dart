@@ -9,10 +9,12 @@ class AyaWidget extends StatelessWidget {
     required this.ayaAr,
     required this.ayaEn,
     required this.num,
+    required this.tafseer
   });
   final int num;
   final String ayaAr;
   final String ayaEn;
+  final bool tafseer ;
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +90,7 @@ class AyaWidget extends StatelessWidget {
             padding: EdgeInsets.only(left: ScreenSize.width * 0.03),
             child: Text(
               ayaEn,
-              textAlign: TextAlign.left,
+              textAlign:tafseer? TextAlign.right:TextAlign.left,
               style: TextStyle(
                 color: Colors.black,
 
