@@ -8,8 +8,10 @@ import 'package:quran/features/homescreen/presentation/cubit/location_cubit.dart
 import 'package:quran/features/homescreen/presentation/cubit/quran_cubit.dart';
 import 'package:quran/features/homescreen/presentation/widgets/azkar_m_widget.dart';
 import 'package:quran/features/homescreen/presentation/widgets/azkar_s_widget.dart';
+import 'package:quran/features/homescreen/presentation/widgets/compass_widget.dart';
 import 'package:quran/features/homescreen/presentation/widgets/custom_kategory_button.dart';
 import 'package:quran/features/homescreen/presentation/widgets/head_screen.dart';
+import 'package:quran/features/homescreen/presentation/widgets/sepha_widget.dart';
 import 'package:quran/features/homescreen/presentation/widgets/surah_widget.dart';
 import 'package:quran/features/homescreen/presentation/widgets/surat_widget.dart';
 import 'package:quran/features/homescreen/presentation/widgets/tafser_widget.dart';
@@ -27,10 +29,12 @@ class _HomeViewState extends State<HomeView> {
   bool quranSelected = true;
   bool azkarSelected = false;
 
-  List<bool> buttonsStates = [true, false, false, false];
+  List<bool> buttonsStates = [true, false, false, false, false, false];
   List<String> buttonsTexts = [
     'السُّوَرُ',
     'التَّفْسِيرُ',
+    'القِبْلَةُ',
+    'التَّسْبِيحُ',
     'أذْكَارُ الصَّبَاحِ',
     'أَذْكَارُ الْمَسَاءِ',
   ];
@@ -73,7 +77,14 @@ class _HomeViewState extends State<HomeView> {
                     itemBuilder: (context, index) => CustomKategoryButton(
                       ontap: () {
                         setState(() {
-                          buttonsStates = [false, false, false, false];
+                          buttonsStates = [
+                            false,
+                            false,
+                            false,
+                            false,
+                            false,
+                            false,
+                          ];
                           buttonsStates[index] = true;
                         });
                       },
@@ -84,8 +95,10 @@ class _HomeViewState extends State<HomeView> {
                 ),
                 if (buttonsStates.elementAt(0)) SuratWidget(),
                 if (buttonsStates.elementAt(1)) TafserWidget(),
-                if (buttonsStates.elementAt(2)) AzkarSWidget(),
-                if (buttonsStates.elementAt(3)) AzkarMWidget(),
+                if (buttonsStates.elementAt(2)) CompassWidget(),
+                if (buttonsStates.elementAt(3)) SephaWidget(),
+                if (buttonsStates.elementAt(4)) AzkarSWidget(),
+                if (buttonsStates.elementAt(5)) AzkarMWidget(),
               ],
             ),
           ),

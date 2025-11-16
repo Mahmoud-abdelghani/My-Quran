@@ -129,6 +129,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.0"
+  circular_countdown_timer:
+    dependency: "direct main"
+    description:
+      name: circular_countdown_timer
+      sha256: "608d166c8c659af5740ffec8859e1429a4849b706675a529dc381ef40784697b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.4"
   clock:
     dependency: transitive
     description:
@@ -246,6 +254,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.4.1"
+  flutter_compass:
+    dependency: "direct main"
+    description:
+      name: flutter_compass
+      sha256: "1b4d7e6c95a675ec8482b5c9c9ccf1ebf0ced3dbec59dce28ad609da953de850"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.1"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -704,6 +720,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.5+1"
+  qibla_direction:
+    dependency: "direct main"
+    description:
+      name: qibla_direction
+      sha256: "024f1b845bc4452d87a35fccc6aeca9ffc6af6bba96f611a5a408e8eb4b35593"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   rxdart:
     dependency: transitive
     description:

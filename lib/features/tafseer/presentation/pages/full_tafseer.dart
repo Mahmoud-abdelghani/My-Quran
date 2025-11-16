@@ -26,7 +26,6 @@ class _FullTafseerState extends State<FullTafseer> {
         if (state is GetTafseerLoading) {
           return Scaffold(body: Center(child: CircularProgressIndicator()));
         } else if (state is GetTafseerSuccess) {
-          List<AyaTafseer> show = state.tafseerOfAyats.reversed.toList();
           return Scaffold(
             backgroundColor: Colors.white,
             body: CustomScrollView(
@@ -93,9 +92,9 @@ class _FullTafseerState extends State<FullTafseer> {
                 SliverList.separated(
                   itemBuilder: (context, index) => AyaWidget(
                     tafseer: true,
-                    ayaAr: show[index].aya,
-                    ayaEn: show[index].text,
-                    num: int.parse(show[index].ayaNum),
+                    ayaAr: state.tafseerOfAyats[index].aya,
+                    ayaEn: state.tafseerOfAyats[index].text,
+                    num: int.parse(state.tafseerOfAyats[index].ayaNum),
                   ),
                   separatorBuilder: (context, index) =>
                       SizedBox(height: ScreenSize.hight * 0.05),

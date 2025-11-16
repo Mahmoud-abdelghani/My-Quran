@@ -13,6 +13,7 @@ import 'package:quran/features/homescreen/presentation/cubit/location_cubit.dart
 import 'package:quran/features/homescreen/presentation/cubit/nextpray_cubit.dart';
 import 'package:quran/features/homescreen/presentation/cubit/quran_cubit.dart';
 import 'package:quran/features/homescreen/presentation/cubit/tafseer_cubit.dart';
+import 'package:quran/features/homescreen/presentation/cubit/tasspeh_cubit.dart';
 import 'package:quran/features/homescreen/presentation/cubit/zekr_cubit.dart';
 import 'package:quran/features/homescreen/presentation/pages/home_view.dart';
 import 'package:quran/features/homescreen/presentation/pages/splach_view.dart';
@@ -83,7 +84,12 @@ class MyApp extends StatelessWidget {
             DioConcumer(dio: Dio(), baseUrl: EndPoints.baseUrlTafseer),
           )..getTafssersTypes(),
         ),
-        BlocProvider(create: (context) => GetTafseerCubit(DioConcumer(dio: Dio(), baseUrl: EndPoints.baseUrlTafseer)),)
+        BlocProvider(
+          create: (context) => GetTafseerCubit(
+            DioConcumer(dio: Dio(), baseUrl: EndPoints.baseUrlTafseer),
+          ),
+        ),
+        BlocProvider(create: (context) => TasspehCubit()),
       ],
 
       child: MaterialApp(
@@ -94,8 +100,8 @@ class MyApp extends StatelessWidget {
           NextPrayDetails.routeName: (context) => NextPrayDetails(),
           SurahView.routeName: (context) => SurahView(),
           PlayerView.routeName: (context) => PlayerView(),
-        SurahTafseerView.routeName: (context)=>SurahTafseerView(),
-        FullTafseer.routeName:(context)=>FullTafseer()
+          SurahTafseerView.routeName: (context) => SurahTafseerView(),
+          FullTafseer.routeName: (context) => FullTafseer(),
         },
         initialRoute: SplachView.routeName,
       ),

@@ -34,6 +34,10 @@ class GetTafseerCubit extends Cubit<GetTafseerState> {
         (index) =>
             AyaTafseer.fromJson(listOfAyat[index], listOfAyatsUrl[index]),
       );
+      if (int.parse(listOfTafseers.first.ayaNum) >
+          int.parse(listOfTafseers.last.ayaNum)) {
+        listOfTafseers = listOfTafseers.reversed.toList();
+      }
       emit(GetTafseerSuccess(tafseerOfAyats: listOfTafseers));
     } on ServerException catch (e) {
       emit(GetTafseerError(error: e.errorModel.errorMessage));

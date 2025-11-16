@@ -13,14 +13,15 @@ class CustomDialog extends StatefulWidget {
     super.key,
     required this.ayatNum,
     required this.surahId,
-    required this.bookId, required this.nameInEng, required this.location,
+    required this.bookId,
+    required this.nameInEng,
+    required this.location,
   });
   final int ayatNum;
   final int surahId;
   final int bookId;
   final String nameInEng;
   final String location;
-  
 
   @override
   State<CustomDialog> createState() => _CustomDialogState();
@@ -29,6 +30,60 @@ class CustomDialog extends StatefulWidget {
 class _CustomDialogState extends State<CustomDialog> {
   int fromValue = 1;
   int toValue = 100;
+
+  GlobalKey fromKey = GlobalKey();
+  GlobalKey toKey = GlobalKey();
+
+  void showMyMenu(GlobalKey key, bool isFrom) {
+    final RenderBox renderBox =
+        key.currentContext!.findRenderObject() as RenderBox;
+    final Offset offset = renderBox.localToGlobal(Offset.zero);
+    final Size size = renderBox.size;
+
+    final RelativeRect position = RelativeRect.fromLTRB(
+      offset.dx,
+      offset.dy + size.height,
+      offset.dx + size.width,
+      0,
+    );
+    showMenu(
+      context: context,
+      position: position,
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(ScreenSize.width * 0.04),
+      ),
+      items:
+          (isFrom
+                  ? List.generate(
+                      toValue <= 100 ? toValue : 100,
+                      (index) => PopupMenuItem(
+                        onTap: () {
+                          setState(() {
+                            fromValue = toValue - index;
+                          });
+                        },
+                        child: Text("${toValue - index}"),
+                      ),
+                    )
+                  : List.generate(
+                      widget.ayatNum <= 100
+                          ? widget.ayatNum - fromValue + 1
+                          : (100 + fromValue <= widget.ayatNum
+                                ? 101
+                                : widget.ayatNum - fromValue + 1),
+                      (index) => PopupMenuItem(
+                        onTap: () {
+                          setState(() {
+                            toValue = index + fromValue;
+                          });
+                        },
+                        child: Text("${index + fromValue}"),
+                      ),
+                    ))
+              .toList(),
+    );
+  }
 
   @override
   void initState() {
@@ -62,26 +117,14 @@ class _CustomDialogState extends State<CustomDialog> {
                   fontFamily: FontsGuid.quranFont,
                 ),
               ),
-              AyatMinu(
-                value: fromValue,
-                onTap: () {
-                  showMenu(
-                    context: context,
-                    position: RelativeRect.fromLTRB(95, 0, 98, 0),
-
-                    items: List.generate(
-                      toValue <= 100 ? toValue : 100,
-                      (index) => PopupMenuItem(
-                        onTap: () {
-                          setState(() {
-                            fromValue = toValue - index;
-                          });
-                        },
-                        child: Text('${toValue - index}'),
-                      ),
-                    ),
-                  );
-                },
+              Container(
+                key: fromKey,
+                child: AyatMinu(
+                  value: fromValue,
+                  onTap: () {
+                    showMyMenu(fromKey, true);
+                  },
+                ),
               ),
               Text(
                 "الى",
@@ -90,31 +133,14 @@ class _CustomDialogState extends State<CustomDialog> {
                   fontFamily: FontsGuid.quranFont,
                 ),
               ),
-              AyatMinu(
-                value: toValue,
-                onTap: () {
-                  showMenu(
-                    context: context,
-                    position: RelativeRect.fromLTRB(98, 0, 95, 0),
-
-                    items: List.generate(
-                      widget.ayatNum <= 100
-                          ? widget.ayatNum - fromValue + 1
-                          : 100 + fromValue <= widget.ayatNum
-                          ? 101
-                          : widget.ayatNum - fromValue + 1,
-                      (index) => PopupMenuItem(
-                        onTap: () {
-                          setState(() {
-                            toValue = index + fromValue;
-                          });
-                        },
-
-                        child: Text('${index + fromValue}'),
-                      ),
-                    ),
-                  );
-                },
+              Container(
+                key: toKey,
+                child: AyatMinu(
+                  value: toValue,
+                  onTap: () {
+                    showMyMenu(toKey, false);
+                  },
+                ),
               ),
             ].reversed.toList(),
           ),
@@ -130,10 +156,11 @@ class _CustomDialogState extends State<CustomDialog> {
               from: fromValue,
               to: toValue,
             );
-            Navigator.pushNamed(context, FullTafseer.routeName,arguments: {
-              'name':widget.nameInEng,
-              'place':widget.location
-            });
+            Navigator.pushNamed(
+              context,
+              FullTafseer.routeName,
+              arguments: {'name': widget.nameInEng, 'place': widget.location},
+            );
           },
           style: ElevatedButton.styleFrom(backgroundColor: ColorGuid.mainColor),
           child: Text(
