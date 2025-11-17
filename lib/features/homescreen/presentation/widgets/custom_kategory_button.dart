@@ -26,7 +26,7 @@ class CustomKategoryButton extends StatelessWidget {
         ),
         backgroundColor: selected ? ColorGuid.mainColor : Colors.white,
         alignment: Alignment.center,
-        fixedSize: Size(ScreenSize.width * 0.35, ScreenSize.hight * 0.05),
+        fixedSize: Size(ScreenSize.width * 0.22, ScreenSize.hight * 0.05),
       ),
       child: Text(
         txt,

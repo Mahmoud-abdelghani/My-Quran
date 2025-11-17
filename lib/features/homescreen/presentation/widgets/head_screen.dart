@@ -21,17 +21,12 @@ class HeadScreen extends StatelessWidget {
           return Padding(
             padding: EdgeInsets.only(top: ScreenSize.hight * 0.03),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: ScreenSize.hight * 0.15,
+                  height: ScreenSize.hight * 0.295,
                   width: ScreenSize.width * 0.4,
                   child: Center(child: CircularProgressIndicator()),
-                ),
-                Image.asset(
-                  "assets/images/image 4.png",
-                  width: ScreenSize.width * 0.54,
-                  height: ScreenSize.hight * 0.3,
-                  fit: BoxFit.cover,
                 ),
               ],
             ),
@@ -39,91 +34,76 @@ class HeadScreen extends StatelessWidget {
         } else if (state is NextpraySuccess) {
           return Padding(
             padding: EdgeInsets.only(top: ScreenSize.hight * 0.03),
-            child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "My Quran",
-                      style: TextStyle(
-                        color: ColorGuid.mainColor,
-                        fontSize: ScreenSize.hight * 0.03,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: FontsGuid.poppins,
-                      ),
-                    ),
-                    Text(
-                      "Read the Quran\nEasily",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: FontsGuid.poppins,
-                        fontSize: ScreenSize.hight * 0.017,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    Text(
-                      DateFormat('HH:mm').format(DateTime.now()),
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: FontsGuid.poppins,
-                        fontSize: ScreenSize.hight * 0.05,
-                      ),
-                    ),
-                    Text(
-                      '${context.read<NextprayCubit>().nextdayModel!.month},${context.read<NextprayCubit>().nextdayModel!.date.split('-')[1]}-${context.read<NextprayCubit>().nextdayModel!.date.split('-')[2]}',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: ScreenSize.hight * 0.012,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: FontsGuid.poppins,
-                      ),
-                    ),
-                    MaterialButton(
-                      onPressed: () {
-                        BlocProvider.of<FetchprayerCubit>(context).getPrayers(
-                          city: context
-                              .read<LocationCubit>()
-                              .loction
-                              .toString(),
-                          country: context
-                              .read<LocationCubit>()
-                              .address
-                              .toString(),
-                        );
-                        Navigator.pushNamed(context, NextPrayDetails.routeName);
-                      },
-                      minWidth: ScreenSize.width * 0.3,
-                      height: ScreenSize.hight * 0.05,
-                      color: ColorGuid.mainColor,
-                      shape: BeveledRectangleBorder(
-                        borderRadius: BorderRadiusGeometry.circular(
-                          ScreenSize.hight * 0.006,
-                        ),
-                      ),
-                      child: Text(
-                        context
-                            .read<NextprayCubit>()
-                            .nextdayModel!
-                            .nextPray
-                            .keys
-                            .first,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: FontsGuid.poppins,
-                          fontSize: ScreenSize.hight * 0.025,
-                        ),
-                      ),
-                    ),
-                  ],
+                Text(
+                  "My Quran",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: ScreenSize.hight * 0.05,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: FontsGuid.poppins,
+                  ),
                 ),
-                Image.asset(
-                  "assets/images/image 4.png",
-                  width: ScreenSize.width * 0.552,
-                  height: ScreenSize.hight * 0.3,
-                  fit: BoxFit.cover,
+                Text(
+                  "Read the Quran Easily",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: FontsGuid.poppins,
+                    fontSize: ScreenSize.hight * 0.02,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                Text(
+                  DateFormat('HH:mm').format(DateTime.now()),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: FontsGuid.poppins,
+                    fontSize: ScreenSize.hight * 0.05,
+                  ),
+                ),
+                Text(
+                  '${context.read<NextprayCubit>().nextdayModel!.month},${context.read<NextprayCubit>().nextdayModel!.date.split('-')[1]}-${context.read<NextprayCubit>().nextdayModel!.date.split('-')[2]}',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: ScreenSize.hight * 0.02,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: FontsGuid.poppins,
+                  ),
+                ),
+                SizedBox(height: ScreenSize.hight * 0.04),
+                MaterialButton(
+                  onPressed: () {
+                    BlocProvider.of<FetchprayerCubit>(context).getPrayers(
+                      city: context.read<LocationCubit>().loction.toString(),
+                      country: context.read<LocationCubit>().address.toString(),
+                    );
+                    Navigator.pushNamed(context, NextPrayDetails.routeName);
+                  },
+                  minWidth: ScreenSize.width * 0.3,
+                  height: ScreenSize.hight * 0.05,
+                  color: Colors.white,
+                  shape: BeveledRectangleBorder(
+                    borderRadius: BorderRadiusGeometry.circular(
+                      ScreenSize.hight * 0.006,
+                    ),
+                  ),
+                  child: Text(
+                    context
+                        .read<NextprayCubit>()
+                        .nextdayModel!
+                        .nextPray
+                        .keys
+                        .first,
+                    style: TextStyle(
+                      color: ColorGuid.mainColor,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: FontsGuid.poppins,
+                      fontSize: ScreenSize.hight * 0.025,
+                    ),
+                  ),
                 ),
               ],
             ),

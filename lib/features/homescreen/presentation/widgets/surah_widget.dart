@@ -13,7 +13,8 @@ class SurahWidget extends StatelessWidget {
     required this.ayat,
     required this.nameInArabic,
     required this.place,
-    required this.num, required this.onTap,
+    required this.num,
+    required this.onTap,
   });
   final String title;
   final String place;
@@ -31,6 +32,7 @@ class SurahWidget extends StatelessWidget {
         minVerticalPadding: ScreenSize.hight * 0.01,
 
         onTap: onTap,
+
         tileColor: Colors.white,
 
         title: Text(

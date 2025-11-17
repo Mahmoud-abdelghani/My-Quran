@@ -48,6 +48,7 @@ class _HomeViewState extends State<HomeView> {
           floatingActionButton: context.read<AudioPlayerCubit>().firstTime
               ? null
               : FloatingActionButton(
+                  heroTag: null,
                   onPressed: () {
                     context.read<AudioPlayerCubit>().isPlaying!
                         ? context.read<AudioPlayerCubit>().pauseAudio()
@@ -59,48 +60,58 @@ class _HomeViewState extends State<HomeView> {
                       : Icon(Icons.play_arrow, color: Colors.white),
                 ),
           backgroundColor: Colors.white,
-          body: Padding(
-            padding: EdgeInsets.only(left: ScreenSize.width * 0.03),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                HeadScreen(),
-                SizedBox(height: ScreenSize.hight * .02),
-                SizedBox(
-                  width: ScreenSize.width,
-                  height: ScreenSize.hight * 0.06,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: buttonsTexts.length,
-                    separatorBuilder: (context, index) =>
-                        SizedBox(width: ScreenSize.width * 0.1),
-                    itemBuilder: (context, index) => CustomKategoryButton(
-                      ontap: () {
-                        setState(() {
-                          buttonsStates = [
-                            false,
-                            false,
-                            false,
-                            false,
-                            false,
-                            false,
-                          ];
-                          buttonsStates[index] = true;
-                        });
-                      },
-                      txt: buttonsTexts[index],
-                      selected: buttonsStates[index],
+          body: Stack(
+            children: [
+              Image.asset(
+                'assets/images/BG Mobile.png',
+                width: ScreenSize.width,
+                height: ScreenSize.hight * 0.35,
+                fit: BoxFit.fill,
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: ScreenSize.width * 0.03),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    HeadScreen(),
+                    SizedBox(height: ScreenSize.hight * .035),
+                    SizedBox(
+                      width: ScreenSize.width,
+                      height: ScreenSize.hight * 0.06,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: buttonsTexts.length,
+                        separatorBuilder: (context, index) =>
+                            SizedBox(width: ScreenSize.width * 0.05),
+                        itemBuilder: (context, index) => CustomKategoryButton(
+                          ontap: () {
+                            setState(() {
+                              buttonsStates = [
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                              ];
+                              buttonsStates[index] = true;
+                            });
+                          },
+                          txt: buttonsTexts[index],
+                          selected: buttonsStates[index],
+                        ),
+                      ),
                     ),
-                  ),
+                    if (buttonsStates.elementAt(0)) SuratWidget(),
+                    if (buttonsStates.elementAt(1)) TafserWidget(),
+                    if (buttonsStates.elementAt(2)) CompassWidget(),
+                    if (buttonsStates.elementAt(3)) SephaWidget(),
+                    if (buttonsStates.elementAt(4)) AzkarSWidget(),
+                    if (buttonsStates.elementAt(5)) AzkarMWidget(),
+                  ],
                 ),
-                if (buttonsStates.elementAt(0)) SuratWidget(),
-                if (buttonsStates.elementAt(1)) TafserWidget(),
-                if (buttonsStates.elementAt(2)) CompassWidget(),
-                if (buttonsStates.elementAt(3)) SephaWidget(),
-                if (buttonsStates.elementAt(4)) AzkarSWidget(),
-                if (buttonsStates.elementAt(5)) AzkarMWidget(),
-              ],
-            ),
+              ),
+            ],
           ),
         );
       },

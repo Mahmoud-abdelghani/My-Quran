@@ -32,6 +32,7 @@ class _SurahViewState extends State<SurahView> {
         } else if (state is FullSurahSuccess) {
           return Scaffold(
             floatingActionButton: FloatingActionButton(
+              heroTag: null,
               child: isPlaying ? Icon(Icons.pause) : Icon(Icons.play_arrow),
               onPressed: () async {
                 Navigator.pushNamed(context, PlayerView.routeName);

@@ -26,15 +26,16 @@ class _PlayerViewState extends State<PlayerView> {
 
   @override
   Widget build(BuildContext context) {
+    qaree = context.read<AudioPlayerCubit>().qaree;
     return Scaffold(
       backgroundColor: Color(0xff140038),
       body: Stack(
         children: [
           Image.asset(
-            "assets/images/image 12.png",
+            "assets/images/BG Mobile2.png",
             width: ScreenSize.width,
-            height: ScreenSize.hight * 0.49,
-            fit: BoxFit.cover,
+            height: ScreenSize.hight * 0.596,
+            fit: BoxFit.fill,
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -48,7 +49,7 @@ class _PlayerViewState extends State<PlayerView> {
                   Icon(
                     Icons.skip_previous,
                     size: ScreenSize.hight * 0.06,
-                    color: ColorGuid.mainColor,
+                    color: Color(0xff140038),
                   ),
                   InkWell(
                     onTap: () async {
@@ -56,12 +57,20 @@ class _PlayerViewState extends State<PlayerView> {
                         await BlocProvider.of<AudioPlayerCubit>(
                           context,
                         ).playAudio(
-                          audioUrl ??
-                              context
+                          context
+                              .read<FullSurahCubit>()
+                              .fullSurahModel!
+                              .mashaih[context
                                   .read<FullSurahCubit>()
                                   .fullSurahModel!
-                                  .mashaih[3]
-                                  .originalUrl,
+                                  .mashaih
+                                  .indexWhere(
+                                    (element) =>
+                                        element.name ==
+                                        context.read<AudioPlayerCubit>().qaree,
+                                  )]
+                              .originalUrl,
+                          qaree,
                         );
                       } else {
                         BlocProvider.of<AudioPlayerCubit>(context).pauseAudio();
@@ -79,24 +88,24 @@ class _PlayerViewState extends State<PlayerView> {
                     },
                     child: CircleAvatar(
                       radius: ScreenSize.hight * 0.04,
-                      backgroundColor: ColorGuid.mainColor,
+                      backgroundColor: Color(0xff140038),
                       child: !context.read<AudioPlayerCubit>().isPlaying!
                           ? Icon(
                               Icons.play_arrow,
                               size: ScreenSize.hight * 0.05,
-                              color: Colors.white,
+                              color: Colors.grey,
                             )
                           : Icon(
                               Icons.pause,
                               size: ScreenSize.hight * 0.05,
-                              color: Colors.white,
+                              color: Colors.grey,
                             ),
                     ),
                   ),
                   Icon(
                     Icons.skip_next,
                     size: ScreenSize.hight * 0.06,
-                    color: ColorGuid.mainColor,
+                    color: Color(0xff140038),
                   ),
                 ],
               ),
@@ -113,13 +122,11 @@ class _PlayerViewState extends State<PlayerView> {
                     children: [
                       Slider(
                         min: 0.0,
-                        max:
-                            context
-                                .read<AudioPlayerCubit>()
-                                .duration
-                                .inSeconds
-                                .toDouble() ??
-                            duration.inSeconds.toDouble(),
+                        max: context
+                            .read<AudioPlayerCubit>()
+                            .duration
+                            .inSeconds
+                            .toDouble(),
                         value: position.inSeconds
                             .clamp(
                               0,
@@ -247,18 +254,22 @@ class _PlayerViewState extends State<PlayerView> {
                           ),
                         ).then((value) async {
                           audioUrl = value;
-                          await context.read<AudioPlayerCubit>().playAudio(
-                            audioUrl!,
-                          );
-                          duration =
-                              await context
-                                  .read<AudioPlayerCubit>()
-                                  .player
-                                  .getDuration() ??
-                              Duration(seconds: 2);
-                          isPlaying = true;
-                          print(value);
-                          setState(() {});
+                          if (value != null) {
+                            await context.read<AudioPlayerCubit>().playAudio(
+                              audioUrl!,
+                              qaree,
+                            );
+
+                            duration =
+                                await context
+                                    .read<AudioPlayerCubit>()
+                                    .player
+                                    .getDuration() ??
+                                Duration(seconds: 2);
+                            isPlaying = true;
+
+                            setState(() {});
+                          }
                         });
                       },
                       icon: Icon(

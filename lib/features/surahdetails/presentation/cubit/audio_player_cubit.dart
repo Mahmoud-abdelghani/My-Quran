@@ -10,14 +10,16 @@ class AudioPlayerCubit extends Cubit<AudioPlayerState> {
   bool? isPlaying = false;
   bool firstTime = true;
   Duration duration = Duration(seconds: 0);
-  late String urlGeneral;
+  String? urlGeneral;
+  String qaree = "Yasser Al Dosari";
 
-  playAudio(String url) async {
+  playAudio(String url, String currenQaree) async {
     urlGeneral = url;
     await player.play(UrlSource(url));
     duration = await player.getDuration() ?? Duration(seconds: 2);
     isPlaying = true;
     firstTime = false;
+    qaree = currenQaree;
     emit(AudioPlayerPlaying());
   }
 
@@ -32,6 +34,6 @@ class AudioPlayerCubit extends Cubit<AudioPlayerState> {
   }
 
   resume() {
-    playAudio(urlGeneral);
+    playAudio(urlGeneral!,qaree);
   }
 }
