@@ -24,7 +24,7 @@ class HeadScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: ScreenSize.hight * 0.295,
+                  height: ScreenSize.hight * 0.35,
                   width: ScreenSize.width * 0.4,
                   child: Center(child: CircularProgressIndicator()),
                 ),
@@ -40,7 +40,7 @@ class HeadScreen extends StatelessWidget {
                 Text(
                   "My Quran",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Theme.of(context).primaryColorLight,
                     fontSize: ScreenSize.hight * 0.05,
                     fontWeight: FontWeight.bold,
                     fontFamily: FontsGuid.poppins,
@@ -49,7 +49,7 @@ class HeadScreen extends StatelessWidget {
                 Text(
                   "Read the Quran Easily",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Theme.of(context).primaryColorLight,
                     fontFamily: FontsGuid.poppins,
                     fontSize: ScreenSize.hight * 0.02,
                     fontWeight: FontWeight.w400,
@@ -58,7 +58,7 @@ class HeadScreen extends StatelessWidget {
                 Text(
                   DateFormat('HH:mm').format(DateTime.now()),
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Theme.of(context).primaryColorLight,
                     fontWeight: FontWeight.bold,
                     fontFamily: FontsGuid.poppins,
                     fontSize: ScreenSize.hight * 0.05,
@@ -67,13 +67,13 @@ class HeadScreen extends StatelessWidget {
                 Text(
                   '${context.read<NextprayCubit>().nextdayModel!.month},${context.read<NextprayCubit>().nextdayModel!.date.split('-')[1]}-${context.read<NextprayCubit>().nextdayModel!.date.split('-')[2]}',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Theme.of(context).primaryColorLight,
                     fontSize: ScreenSize.hight * 0.02,
                     fontWeight: FontWeight.bold,
                     fontFamily: FontsGuid.poppins,
                   ),
                 ),
-                SizedBox(height: ScreenSize.hight * 0.04),
+                SizedBox(height: ScreenSize.hight * 0.02),
                 MaterialButton(
                   onPressed: () {
                     BlocProvider.of<FetchprayerCubit>(context).getPrayers(
@@ -84,7 +84,7 @@ class HeadScreen extends StatelessWidget {
                   },
                   minWidth: ScreenSize.width * 0.3,
                   height: ScreenSize.hight * 0.05,
-                  color: Colors.white,
+                  color: Theme.of(context).primaryColorLight,
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadiusGeometry.circular(
                       ScreenSize.hight * 0.006,
@@ -98,7 +98,7 @@ class HeadScreen extends StatelessWidget {
                         .keys
                         .first,
                     style: TextStyle(
-                      color: ColorGuid.mainColor,
+                      color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.bold,
                       fontFamily: FontsGuid.poppins,
                       fontSize: ScreenSize.hight * 0.025,

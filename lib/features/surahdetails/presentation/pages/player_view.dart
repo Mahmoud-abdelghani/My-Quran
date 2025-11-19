@@ -32,7 +32,9 @@ class _PlayerViewState extends State<PlayerView> {
       body: Stack(
         children: [
           Image.asset(
-            "assets/images/BG Mobile2.png",
+            ThemeMode.values.first == ThemeMode.light
+                ? "assets/images/BG Mobile2.png"
+                : "assets/images/BG MobileDark2.png",
             width: ScreenSize.width,
             height: ScreenSize.hight * 0.596,
             fit: BoxFit.fill,
@@ -141,7 +143,7 @@ class _PlayerViewState extends State<PlayerView> {
                             Duration(seconds: value.toInt()),
                           );
                         },
-                        activeColor: ColorGuid.mainColor,
+                        activeColor: Theme.of(context).primaryColor,
                         inactiveColor: Colors.grey,
                       ),
                       Row(
@@ -193,7 +195,7 @@ class _PlayerViewState extends State<PlayerView> {
                 ),
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: ColorGuid.mainColor,
+                    color: Theme.of(context).primaryColor,
                     width: ScreenSize.hight * 0.001,
                   ),
                 ),
@@ -205,7 +207,7 @@ class _PlayerViewState extends State<PlayerView> {
                     Text(
                       qaree,
                       style: TextStyle(
-                        fontSize: ScreenSize.hight * 0.03,
+                        fontSize: ScreenSize.hight * 0.025,
                         fontWeight: FontWeight.w400,
                         fontFamily: FontsGuid.quranFont,
                         color: Colors.grey,

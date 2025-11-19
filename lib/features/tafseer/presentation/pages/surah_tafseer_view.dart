@@ -5,10 +5,7 @@ import 'package:quran/core/utils/fonts_guid.dart';
 import 'package:quran/core/utils/screen_size.dart';
 import 'package:quran/features/homescreen/data/models/tafseer_type_model.dart';
 import 'package:quran/features/homescreen/presentation/cubit/quran_cubit.dart';
-import 'package:quran/features/homescreen/presentation/cubit/tafseer_cubit.dart';
 import 'package:quran/features/homescreen/presentation/widgets/surah_widget.dart';
-import 'package:quran/features/tafseer/presentation/cubit/get_tafseer_cubit.dart';
-import 'package:quran/features/tafseer/presentation/pages/full_tafseer.dart';
 import 'package:quran/features/tafseer/presentation/widgets/custom_dialog.dart';
 
 class SurahTafseerView extends StatefulWidget {
@@ -25,16 +22,11 @@ class _SurahViewState extends State<SurahTafseerView> {
     TafseerTypeModel tafseerTypeModel =
         ModalRoute.of(context)!.settings.arguments as TafseerTypeModel;
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
-        shadowColor: ColorGuid.mainColor,
         elevation: 10,
-        backgroundColor: ColorGuid.mainColor,
         title: Text(
           tafseerTypeModel.bookName,
           style: TextStyle(
-            color: Colors.white,
             fontWeight: FontWeight.bold,
             fontFamily: FontsGuid.quranFont,
             fontSize: ScreenSize.hight * 0.03,
@@ -51,16 +43,11 @@ class _SurahViewState extends State<SurahTafseerView> {
                   location: context.read<QuranCubit>().surs[index].place,
                   nameInEng: context.read<QuranCubit>().surs[index].nameInEn,
                   bookId: int.parse(tafseerTypeModel.id),
-                  surahId: index+1,
+                  surahId: index + 1,
                   ayatNum: context.read<QuranCubit>().surs[index].ayatnum,
-
                 ),
               );
-              // BlocProvider.of<GetTafseerCubit>(context).fetchFullSurahTafseer(
-              //   tafseerId: tafseerTypeModel.id,
-              //   surahNum: (index + 1).toString(),
-              // );
-              // Navigator.pushNamed(context, FullTafseer.routeName);
+              
             },
             title: context.read<QuranCubit>().surs[index].nameInEn,
             ayat: context.read<QuranCubit>().surs[index].ayatnum.toString(),

@@ -13,10 +13,10 @@ class SurahModel {
   });
   factory SurahModel.fromJson(Map<String, dynamic> json) {
     return SurahModel(
-      nameInEn: json[apiKeys.surahName],
-      nameInAr: json[apiKeys.surahNameArabic],
-      ayatnum: json[apiKeys.totalAyah],
-      place: json[apiKeys.revelationPlace],
+      nameInEn: json[ApiKeys.surahName],
+      nameInAr: json[ApiKeys.surahNameArabic],
+      ayatnum: json[ApiKeys.totalAyah],
+      place: json[ApiKeys.revelationPlace],
     );
   }
 }

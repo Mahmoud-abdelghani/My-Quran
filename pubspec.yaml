@@ -55,6 +55,7 @@ dependencies:
   qibla_direction: 1.0.1
   flutter_compass: ^0.8.1
   circular_countdown_timer: ^0.2.4
+  flutter_launcher_icons: ^0.14.4
 
 
 dev_dependencies:
@@ -111,3 +112,13 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+flutter_launcher_icons:
+
+  image_path: "assets/images/Gemini.png"
+
+  android: true 
+
+
+  ios: true
+  
+  min_sdk_android: 21

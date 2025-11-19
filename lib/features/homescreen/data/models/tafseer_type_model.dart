@@ -15,11 +15,11 @@ class TafseerTypeModel {
   });
   factory TafseerTypeModel.fromJson(Map<String, dynamic> json) {
     return TafseerTypeModel(
-      author: json[apiKeys.author],
-      id: json[apiKeys.id].toString(),
-      bookName: json[apiKeys.bookName],
-      language: json[apiKeys.language]=='ar'?'الْعَرَبِيَّةُ':json[apiKeys.language]=='en'?'English':'Dutch',
-      name: json[apiKeys.name],
+      author: json[ApiKeys.author],
+      id: json[ApiKeys.id].toString(),
+      bookName: json[ApiKeys.bookName],
+      language: json[ApiKeys.language]=='ar'?'الْعَرَبِيَّةُ':json[ApiKeys.language]=='en'?'English':'Dutch',
+      name: json[ApiKeys.name],
     );
   }
 }

@@ -4,12 +4,13 @@ import 'package:quran/core/errors/error_model.dart';
 import 'package:quran/core/errors/server_exception.dart';
 
 class DioConcumer extends ApiConcumer {
-  @override
+  
   Dio dio;
   DioConcumer({required this.dio, required String baseUrl}) {
     dio.options.baseUrl = baseUrl;
     dio.interceptors.add(LogInterceptor(responseBody: true));
   }
+  @override
   Future get(String path, {Map<String, dynamic>? queryParameter}) async {
     try {
       final response = await dio.get(path);

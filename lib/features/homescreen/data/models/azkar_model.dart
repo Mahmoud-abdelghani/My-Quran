@@ -8,10 +8,10 @@ class AzkarModel {
   factory AzkarModel.fromJson(Map<String, dynamic> json) {
     return AzkarModel(
       azkar: List.generate(
-        json[apiKeys.content].length,
-        (index) => ZekrModel.fromJson(json[apiKeys.content][index]),
+        json[ApiKeys.content].length,
+        (index) => ZekrModel.fromJson(json[ApiKeys.content][index]),
       ),
-      type: json[apiKeys.title],
+      type: json[ApiKeys.title],
     );
   }
 }

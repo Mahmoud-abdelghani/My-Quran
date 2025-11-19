@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran/core/utils/color_guid.dart';
 import 'package:quran/core/utils/fonts_guid.dart';
 import 'package:quran/core/utils/screen_size.dart';
-import 'package:quran/features/homescreen/presentation/cubit/tafseer_cubit.dart';
 import 'package:quran/features/tafseer/presentation/cubit/get_tafseer_cubit.dart';
 import 'package:quran/features/tafseer/presentation/pages/full_tafseer.dart';
 import 'package:quran/features/tafseer/presentation/widgets/ayat_minu.dart';
@@ -49,7 +48,7 @@ class _CustomDialogState extends State<CustomDialog> {
     showMenu(
       context: context,
       position: position,
-      color: Colors.white,
+      color: Theme.of(context).primaryColorLight,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(ScreenSize.width * 0.04),
       ),
@@ -94,16 +93,15 @@ class _CustomDialogState extends State<CustomDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Colors.white,
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             'اختر 100 ايه',
             style: TextStyle(
-              color: ColorGuid.mainColor,
+              color: Theme.of(context).primaryColor,
               fontFamily: FontsGuid.quranFont,
-              fontSize: ScreenSize.hight * 0.015,
+              fontSize: ScreenSize.hight * 0.023,
             ),
           ),
           SizedBox(height: ScreenSize.hight * 0.02),
@@ -146,7 +144,10 @@ class _CustomDialogState extends State<CustomDialog> {
           ),
         ],
       ),
-      title: Text('Choose a range'),
+      title: Text(
+        'Choose a range',
+        style: TextStyle(color: Theme.of(context).primaryColorDark),
+      ),
       actions: [
         ElevatedButton(
           onPressed: () {
@@ -162,14 +163,14 @@ class _CustomDialogState extends State<CustomDialog> {
               arguments: {'name': widget.nameInEng, 'place': widget.location},
             );
           },
-          style: ElevatedButton.styleFrom(backgroundColor: ColorGuid.mainColor),
+
           child: Text(
             'فَسِّرْ',
             style: TextStyle(
-              fontSize: ScreenSize.hight * 0.01,
+              fontSize: ScreenSize.hight * 0.025,
               fontFamily: FontsGuid.quranFont,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: Theme.of(context).primaryColorLight,
             ),
           ),
         ),

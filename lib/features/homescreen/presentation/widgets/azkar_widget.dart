@@ -25,7 +25,7 @@ class _AzkarWidgetState extends State<AzkarWidget> {
   Widget build(BuildContext context) {
     return Material(
       elevation: 6,
-      shadowColor: ColorGuid.mainColor,
+      shadowColor: Theme.of(context).primaryColor,
       borderRadius: BorderRadius.circular(25),
       child: GestureDetector(
         onTap: () {
@@ -34,25 +34,31 @@ class _AzkarWidgetState extends State<AzkarWidget> {
           });
         },
         child: ExpansionTile(
-          backgroundColor: Colors.white,
           showTrailingIcon: false,
 
           title: Text(
             widget.title,
-            style: TextStyle(fontSize: ScreenSize.hight * 0.028),
+            style: TextStyle(
+              fontSize: ScreenSize.hight * 0.028,
+              color: Theme.of(context).primaryColorDark,
+            ),
           ),
           leading: Stack(
             alignment: Alignment.center,
             children: [
               Image.asset(
                 "assets/images/muslim (1) 1.png",
-                width: ScreenSize.width * 0.08,
+                width: ScreenSize.width * 0.12,
                 height: ScreenSize.hight * 0.1,
+                color: Theme.of(context).primaryColor,
                 fit: BoxFit.fill,
               ),
               Text(
                 widget.num.toString(),
-                style: TextStyle(fontSize: ScreenSize.hight * 0.02),
+                style: TextStyle(
+                  fontSize: ScreenSize.hight * 0.02,
+                  color: Theme.of(context).primaryColorDark,
+                ),
               ),
             ],
           ),
@@ -64,7 +70,7 @@ class _AzkarWidgetState extends State<AzkarWidget> {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: ScreenSize.hight * 0.018,
-                    color: ColorGuid.mainColor,
+                    color: Theme.of(context).primaryColor,
                     fontFamily: FontsGuid.quranFont,
                   ),
                 )
@@ -73,7 +79,7 @@ class _AzkarWidgetState extends State<AzkarWidget> {
             horizontal: ScreenSize.width * 0.05,
           ),
           enabled: widget.num != 0,
-          collapsedBackgroundColor: Colors.white,
+
           internalAddSemanticForOnTap: true,
 
           onExpansionChanged: (value) {
@@ -85,7 +91,7 @@ class _AzkarWidgetState extends State<AzkarWidget> {
               widget.zekr,
               style: TextStyle(
                 fontSize: ScreenSize.hight * 0.018,
-                color: ColorGuid.mainColor,
+                color: Theme.of(context).primaryColor,
                 fontFamily: FontsGuid.quranFont,
               ),
             ),

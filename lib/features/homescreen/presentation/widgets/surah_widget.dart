@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran/core/utils/color_guid.dart';
 import 'package:quran/core/utils/fonts_guid.dart';
 import 'package:quran/core/utils/screen_size.dart';
-import 'package:quran/features/surahdetails/presentation/cubit/full_surah_cubit.dart';
-import 'package:quran/features/surahdetails/presentation/pages/surah_view.dart';
 
 class SurahWidget extends StatelessWidget {
   const SurahWidget({
@@ -26,14 +23,12 @@ class SurahWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       elevation: 6,
-      shadowColor: ColorGuid.mainColor,
+      shadowColor: Theme.of(context).primaryColor,
       borderRadius: BorderRadius.circular(25),
       child: ListTile(
         minVerticalPadding: ScreenSize.hight * 0.01,
 
         onTap: onTap,
-
-        tileColor: Colors.white,
 
         title: Text(
           title,
@@ -46,11 +41,15 @@ class SurahWidget extends StatelessWidget {
               "assets/images/muslim (1) 1.png",
               width: ScreenSize.width * 0.12,
               height: ScreenSize.hight * 0.1,
+              color: Theme.of(context).primaryColor,
               fit: BoxFit.fill,
             ),
             Text(
               num.toString(),
-              style: TextStyle(fontSize: ScreenSize.hight * 0.02),
+              style: TextStyle(
+                fontSize: ScreenSize.hight * 0.02,
+                color: Theme.of(context).primaryColorDark,
+              ),
             ),
           ],
         ),
@@ -64,7 +63,7 @@ class SurahWidget extends StatelessWidget {
             fontSize: ScreenSize.hight * 0.03,
             fontWeight: FontWeight.w400,
             fontFamily: FontsGuid.quranFont,
-            color: ColorGuid.mainColor,
+            color: Theme.of(context).primaryColor,
           ),
         ),
       ),

@@ -1,12 +1,10 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:just_audio/just_audio.dart' hide AudioPlayer;
 import 'package:quran/core/utils/color_guid.dart';
 import 'package:quran/core/utils/fonts_guid.dart';
 import 'package:quran/core/utils/screen_size.dart';
 
-import 'package:quran/features/homescreen/presentation/cubit/quran_cubit.dart';
 import 'package:quran/features/surahdetails/presentation/cubit/full_surah_cubit.dart';
 import 'package:quran/features/surahdetails/presentation/pages/player_view.dart';
 import 'package:quran/features/surahdetails/presentation/widgets/aya_widget.dart';
@@ -33,12 +31,20 @@ class _SurahViewState extends State<SurahView> {
           return Scaffold(
             floatingActionButton: FloatingActionButton(
               heroTag: null,
-              child: isPlaying ? Icon(Icons.pause) : Icon(Icons.play_arrow),
+              child: isPlaying
+                  ? Icon(
+                      Icons.pause,
+                      color: Theme.of(context).primaryColorLight,
+                    )
+                  : Icon(
+                      Icons.play_arrow,
+                      color: Theme.of(context).primaryColorLight,
+                    ),
               onPressed: () async {
                 Navigator.pushNamed(context, PlayerView.routeName);
               },
             ),
-            backgroundColor: Colors.white,
+
             body: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
@@ -50,7 +56,7 @@ class _SurahViewState extends State<SurahView> {
                     child: Text(
                       state.fullSurahModel.name,
                       style: TextStyle(
-                        color: ColorGuid.mainColor,
+                        color: Theme.of(context).primaryColor,
                         fontSize: ScreenSize.hight * 0.05,
                         fontFamily: FontsGuid.quranFont,
                         fontWeight: FontWeight.bold,
@@ -64,7 +70,7 @@ class _SurahViewState extends State<SurahView> {
                     child: Text(
                       state.fullSurahModel.translation,
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Theme.of(context).primaryColorDark,
                         fontSize: ScreenSize.hight * 0.03,
                         fontFamily: FontsGuid.quranFont,
                         fontWeight: FontWeight.w400,
@@ -80,7 +86,7 @@ class _SurahViewState extends State<SurahView> {
                       Text(
                         "بِسْمِ اللهِ الرَّحْمنِ الرَّحِيمِ",
                         style: TextStyle(
-                          color: ColorGuid.mainColor,
+                          color: Theme.of(context).primaryColor,
                           fontSize: ScreenSize.hight * 0.04,
                           fontFamily: FontsGuid.quranFont,
                           fontWeight: FontWeight.bold,
@@ -88,10 +94,10 @@ class _SurahViewState extends State<SurahView> {
                         textAlign: TextAlign.center,
                       ),
                       Text(
-                        "In the name of Allah, the Most Gracious, the Most Merciful",
+                        "In the name of Allah, the Most Compassionate, the Most Merciful",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Theme.of(context).primaryColorDark,
                           fontSize: ScreenSize.hight * 0.03,
                           fontFamily: FontsGuid.quranFont,
                           fontWeight: FontWeight.w400,

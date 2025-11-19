@@ -9,17 +9,17 @@ class AyaWidget extends StatelessWidget {
     required this.ayaAr,
     required this.ayaEn,
     required this.num,
-    required this.tafseer
+    required this.tafseer,
   });
   final int num;
   final String ayaAr;
   final String ayaEn;
-  final bool tafseer ;
+  final bool tafseer;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Colors.transparent,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
@@ -27,7 +27,7 @@ class AyaWidget extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(ScreenSize.hight * 0.05),
-                color: Color(0xfff9f5fd),
+                color: Theme.of(context).secondaryHeaderColor,
               ),
               height: ScreenSize.hight * 0.07,
               width: ScreenSize.width * 0.9,
@@ -36,11 +36,11 @@ class AyaWidget extends StatelessWidget {
                   SizedBox(width: ScreenSize.width * 0.034),
                   CircleAvatar(
                     radius: ScreenSize.hight * 0.023,
-                    backgroundColor: ColorGuid.mainColor,
+                    backgroundColor: Theme.of(context).primaryColor,
                     child: Text(
                       num.toString(),
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Theme.of(context).primaryColorLight,
                         fontFamily: FontsGuid.poppins,
                         fontWeight: FontWeight.bold,
                         fontSize: ScreenSize.hight * 0.022,
@@ -53,17 +53,17 @@ class AyaWidget extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.share,
-                        color: ColorGuid.mainColor,
+                        color: Theme.of(context).primaryColor,
                         size: ScreenSize.hight * 0.035,
                       ),
                       Icon(
                         Icons.play_arrow_outlined,
-                        color: ColorGuid.mainColor,
+                        color: Theme.of(context).primaryColor,
                         size: ScreenSize.hight * 0.05,
                       ),
                       Icon(
                         Icons.bookmark_border,
-                        color: ColorGuid.mainColor,
+                        color: Theme.of(context).primaryColor,
                         size: ScreenSize.hight * 0.035,
                       ),
                     ],
@@ -79,7 +79,7 @@ class AyaWidget extends StatelessWidget {
               ayaAr,
               textAlign: TextAlign.right,
               style: TextStyle(
-                color: Colors.black,
+                color: Theme.of(context).primaryColorDark,
                 fontSize: ScreenSize.hight * 0.04,
                 fontFamily: FontsGuid.quranFont,
                 fontWeight: FontWeight.bold,
@@ -90,9 +90,9 @@ class AyaWidget extends StatelessWidget {
             padding: EdgeInsets.only(left: ScreenSize.width * 0.03),
             child: Text(
               ayaEn,
-              textAlign:tafseer? TextAlign.right:TextAlign.left,
+              textAlign: tafseer ? TextAlign.right : TextAlign.left,
               style: TextStyle(
-                color: Colors.black,
+                color: Theme.of(context).primaryColorDark,
 
                 fontSize: ScreenSize.hight * 0.025,
                 fontFamily: FontsGuid.quranFont,

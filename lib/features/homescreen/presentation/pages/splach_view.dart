@@ -35,7 +35,6 @@ class _SplachViewState extends State<SplachView> {
             color: ColorGuid.mainColor,
           ),
           child: Scaffold(
-            backgroundColor: Colors.white,
             body: Center(
               child: Column(
                 children: [
@@ -49,16 +48,17 @@ class _SplachViewState extends State<SplachView> {
                   Text(
                     "My Quran",
                     style: TextStyle(
+                      
                       fontFamily: FontsGuid.poppins,
                       fontSize: ScreenSize.hight * 0.055,
-                      color: ColorGuid.mainColor,
+                      color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
                     "Read the Quran Easily",
                     style: TextStyle(
-                      color: Colors.grey,
+                      color: Theme.of(context).splashColor,
                       fontFamily: FontsGuid.poppins,
                       fontSize: ScreenSize.hight * 0.03,
                       fontWeight: FontWeight.w400,
@@ -75,12 +75,11 @@ class _SplachViewState extends State<SplachView> {
                           context,
                         ).getLocation();
                       } on Exception catch (e) {
-                        // TODO
+                        
                         log(e.toString());
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: ColorGuid.mainColor,
                       fixedSize: Size(
                         ScreenSize.width * 0.48,
                         ScreenSize.hight * 0.07,
@@ -90,7 +89,7 @@ class _SplachViewState extends State<SplachView> {
                       "Read Now",
                       style: TextStyle(
                         fontSize: ScreenSize.hight * 0.02,
-                        color: Colors.white,
+                        color: Theme.of(context).primaryColorLight,
                         fontFamily: FontsGuid.poppins,
                         fontWeight: FontWeight.bold,
                       ),

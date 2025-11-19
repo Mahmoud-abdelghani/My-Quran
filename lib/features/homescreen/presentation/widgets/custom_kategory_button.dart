@@ -18,21 +18,28 @@ class CustomKategoryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: ontap,
+
       style: ElevatedButton.styleFrom(
-        shadowColor: ColorGuid.mainColor,
+        shadowColor: Theme.of(context).shadowColor,
         elevation: 10,
         shape: RoundedRectangleBorder(
-          side: BorderSide(color: ColorGuid.mainColor),
+          side: BorderSide(color: Theme.of(context).primaryColor),
         ),
-        backgroundColor: selected ? ColorGuid.mainColor : Colors.white,
+        backgroundColor: selected
+            ? Theme.of(context).primaryColor
+            : Theme.of(context).scaffoldBackgroundColor,
         alignment: Alignment.center,
-        fixedSize: Size(ScreenSize.width * 0.22, ScreenSize.hight * 0.05),
+        fixedSize: Size(ScreenSize.width * 0.28, ScreenSize.hight * 0.05),
       ),
+
       child: Text(
+        textAlign: TextAlign.center,
         txt,
         style: TextStyle(
-          color: selected ? Colors.white : ColorGuid.mainColor,
-          fontSize: ScreenSize.hight * 0.02,
+          color: selected
+              ? Theme.of(context).primaryColorLight
+              : Theme.of(context).primaryColor,
+          fontSize: ScreenSize.hight * 0.016,
           fontWeight: FontWeight.bold,
           fontFamily: FontsGuid.poppins,
         ),

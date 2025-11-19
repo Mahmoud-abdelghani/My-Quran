@@ -3,9 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran/core/utils/color_guid.dart';
 import 'package:quran/core/utils/fonts_guid.dart';
 import 'package:quran/core/utils/screen_size.dart';
-import 'package:quran/features/homescreen/presentation/cubit/tafseer_cubit.dart';
 import 'package:quran/features/surahdetails/presentation/widgets/aya_widget.dart';
-import 'package:quran/features/tafseer/data/models/aya_tafseer.dart';
 import 'package:quran/features/tafseer/presentation/cubit/get_tafseer_cubit.dart';
 
 class FullTafseer extends StatefulWidget {
@@ -27,7 +25,6 @@ class _FullTafseerState extends State<FullTafseer> {
           return Scaffold(body: Center(child: CircularProgressIndicator()));
         } else if (state is GetTafseerSuccess) {
           return Scaffold(
-            backgroundColor: Colors.white,
             body: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
@@ -39,7 +36,7 @@ class _FullTafseerState extends State<FullTafseer> {
                     child: Text(
                       argu['name']!,
                       style: TextStyle(
-                        color: ColorGuid.mainColor,
+                        color: Theme.of(context).primaryColor,
                         fontSize: ScreenSize.hight * 0.05,
                         fontFamily: FontsGuid.quranFont,
                         fontWeight: FontWeight.bold,
@@ -53,7 +50,7 @@ class _FullTafseerState extends State<FullTafseer> {
                     child: Text(
                       argu['place']!,
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Theme.of(context).primaryColorDark,
                         fontSize: ScreenSize.hight * 0.03,
                         fontFamily: FontsGuid.quranFont,
                         fontWeight: FontWeight.w400,
@@ -69,7 +66,7 @@ class _FullTafseerState extends State<FullTafseer> {
                       Text(
                         "بِسْمِ اللهِ الرَّحْمنِ الرَّحِيمِ",
                         style: TextStyle(
-                          color: ColorGuid.mainColor,
+                          color: Theme.of(context).primaryColor,
                           fontSize: ScreenSize.hight * 0.04,
                           fontFamily: FontsGuid.quranFont,
                           fontWeight: FontWeight.bold,
@@ -80,7 +77,7 @@ class _FullTafseerState extends State<FullTafseer> {
                         "In the name of Allah, the Most Gracious, the Most Merciful",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Theme.of(context).primaryColorDark,
                           fontSize: ScreenSize.hight * 0.03,
                           fontFamily: FontsGuid.quranFont,
                           fontWeight: FontWeight.w400,

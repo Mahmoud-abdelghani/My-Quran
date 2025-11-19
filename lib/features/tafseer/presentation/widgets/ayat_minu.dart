@@ -10,14 +10,18 @@ class AyatMinu extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
-        border: Border.all(color: ColorGuid.mainColor),
-        color: Colors.white,
+        border: Border.all(color: Theme.of(context).primaryColor),
+        color: Theme.of(context).primaryColorLight,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text('$value'),
-          IconButton(onPressed:onTap, icon: Icon(Icons.keyboard_arrow_down)),
+          IconButton(
+            onPressed: onTap,
+            icon: Icon(Icons.keyboard_arrow_down),
+            color: Theme.of(context).primaryColor,
+          ),
         ],
       ),
     );

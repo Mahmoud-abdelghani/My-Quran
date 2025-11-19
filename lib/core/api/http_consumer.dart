@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'package:quran/core/api/api_concumer.dart';
 import 'package:quran/core/errors/error_model.dart';

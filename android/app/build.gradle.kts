@@ -8,7 +8,7 @@ plugins {
 android {
     namespace = "com.example.quran"
     compileSdk = 35
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
          // Flag to enable support for the new language APIs

@@ -18,12 +18,12 @@ class FullSurahModel {
     return FullSurahModel(
       mashaih: List.generate(
         5,
-        (index) => ShekModel.fromJson(json[apiKeys.audio]['${index + 1}']),
+        (index) => ShekModel.fromJson(json[ApiKeys.audio]['${index + 1}']),
       ),
-      name: json[apiKeys.surahName],
-      ayatInAr: json[apiKeys.arabic1],
-      ayatInEn: json[apiKeys.english],
-      translation: json[apiKeys.revelationPlace],
+      name: json[ApiKeys.surahName],
+      ayatInAr: json[ApiKeys.arabic1],
+      ayatInEn: json[ApiKeys.english],
+      translation: json[ApiKeys.revelationPlace],
     );
   }
 }

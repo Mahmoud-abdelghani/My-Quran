@@ -7,9 +7,9 @@ class ZekrModel {
   ZekrModel({required this.bless, required this.count, required this.zekr});
   factory ZekrModel.fromJson(Map<String, dynamic> json) {
     return ZekrModel(
-      bless: json[apiKeys.bless],
-      count: json[apiKeys.repeat],
-      zekr: json[apiKeys.zekr],
+      bless: json[ApiKeys.bless],
+      count: json[ApiKeys.repeat],
+      zekr: json[ApiKeys.zekr],
     );
   }
 }

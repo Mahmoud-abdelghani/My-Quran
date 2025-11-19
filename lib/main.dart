@@ -1,13 +1,11 @@
-import 'package:audio_service/audio_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:just_audio_background/just_audio_background.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:quran/core/api/api_concumer.dart';
 import 'package:quran/core/api/dio_concumer.dart';
 import 'package:quran/core/api/end_points.dart';
 import 'package:quran/core/database/cache_helper.dart';
+import 'package:quran/core/utils/app_theme.dart';
 
 import 'package:quran/features/homescreen/presentation/cubit/location_cubit.dart';
 import 'package:quran/features/homescreen/presentation/cubit/nextpray_cubit.dart';
@@ -104,6 +102,9 @@ class MyApp extends StatelessWidget {
           FullTafseer.routeName: (context) => FullTafseer(),
         },
         initialRoute: SplachView.routeName,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        themeMode: ThemeMode.dark,
       ),
     );
   }

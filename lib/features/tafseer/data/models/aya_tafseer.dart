@@ -8,9 +8,9 @@ class AyaTafseer {
   AyaTafseer( {required this.ayaNum, required this.text,required this.aya});
   factory AyaTafseer.fromJson(Map<String, dynamic> jsonTafseer,Map<String ,dynamic> jsonAya) {
     return AyaTafseer(
-      ayaNum: jsonTafseer[apiKeys.ayahNumber].toString(),
-      text: jsonTafseer[apiKeys.text],
-      aya:jsonAya[apiKeys.text]
+      ayaNum: jsonTafseer[ApiKeys.ayahNumber].toString(),
+      text: jsonTafseer[ApiKeys.text],
+      aya:jsonAya[ApiKeys.text]
     );
   }
 }

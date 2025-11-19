@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:quran/core/api/api_concumer.dart';
@@ -11,8 +10,6 @@ import 'package:quran/core/database/cache_helper.dart';
 import 'package:quran/core/errors/server_exception.dart';
 import 'package:quran/core/services/local_notification_service.dart';
 import 'package:quran/features/homescreen/data/models/nextday_model.dart';
-import 'package:quran/features/timedetails/presentation/pages/next_pray_details.dart';
-import 'package:timezone/timezone.dart';
 import 'package:workmanager/workmanager.dart';
 
 class WorkManagerService {
@@ -78,6 +75,8 @@ void callbackDispatcher() {
             hour: 9,
             min: 0,
             sound: null,
+            payload: 
+            "El_Sabah"
           );
           break;
         }
@@ -90,6 +89,7 @@ void callbackDispatcher() {
             body: "لا تنسي اذكار المساء",
             hour: 17,
             min: 0,
+            payload: "El_Massa"
           );
           break;
         }
@@ -140,6 +140,7 @@ void callbackDispatcher() {
               hour: hours,
               min: min,
               sound: nextdayModel.nextPray.keys.first.toLowerCase(),
+              payload: 'El_Salah'
             );
             log('donees');
           } on ServerException catch (e) {

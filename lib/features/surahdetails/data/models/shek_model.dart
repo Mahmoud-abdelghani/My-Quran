@@ -5,6 +5,6 @@ class ShekModel {
   final String originalUrl;
   ShekModel({required this.name, required this.originalUrl});
   factory ShekModel.fromJson(Map<String, dynamic> json) {
-    return ShekModel(name: json[apiKeys.reciter],originalUrl: json[apiKeys.originalUrl]);
+    return ShekModel(name: json[ApiKeys.reciter],originalUrl: json[ApiKeys.originalUrl]);
   }
 }

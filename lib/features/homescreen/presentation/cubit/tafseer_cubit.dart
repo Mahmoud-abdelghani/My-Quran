@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
 import 'package:quran/core/api/api_concumer.dart';
 import 'package:quran/core/api/end_points.dart';

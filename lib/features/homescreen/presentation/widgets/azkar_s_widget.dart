@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran/core/utils/screen_size.dart';
-import 'package:quran/features/homescreen/presentation/cubit/quran_cubit.dart';
 import 'package:quran/features/homescreen/presentation/cubit/zekr_cubit.dart';
 import 'package:quran/features/homescreen/presentation/widgets/azkar_widget.dart';
 

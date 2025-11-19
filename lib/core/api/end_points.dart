@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+
 
 class EndPoints {
   static const String baseUrlTimes =
@@ -17,7 +17,7 @@ class EndPoints {
   static const String fetchAyaTafseer = "quran/";
 }
 
-class apiKeys {
+class ApiKeys {
   static const String data = "data";
   static const String timings = "timings";
   static const String hijri = "hijri";

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran/core/utils/screen_size.dart';
 import 'package:quran/features/homescreen/presentation/cubit/tafseer_cubit.dart';
-import 'package:quran/features/homescreen/presentation/widgets/surah_widget.dart';
 import 'package:quran/features/homescreen/presentation/widgets/tafseer_type_widget.dart';
 import 'package:quran/features/tafseer/presentation/pages/surah_tafseer_view.dart';
 

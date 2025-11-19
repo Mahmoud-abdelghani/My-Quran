@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -7,9 +8,14 @@ import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 
 class LocalNotificationService {
+  static StreamController<NotificationResponse> notifyStreamController =
+      StreamController();
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
-  static onTapNotification(NotificationResponse notificationResponse) {}
+  static onTapNotification(NotificationResponse notificationResponse) {
+    notifyStreamController.add(notificationResponse);
+  }
+
   Future<void> initNotifications() async {
     InitializationSettings initializationSettings = InitializationSettings(
       android: AndroidInitializationSettings('@mipmap/ic_launcher'),
@@ -48,7 +54,8 @@ class LocalNotificationService {
     required String body,
     required int hour,
     required int min,
-    String? sound
+    required String payload,
+    String? sound,
   }) async {
     try {
       log('update alert');
@@ -58,9 +65,9 @@ class LocalNotificationService {
           "schadueled",
           importance: Importance.max,
           priority: Priority.high,
-          sound:sound!=null? RawResourceAndroidNotificationSound(
-            sound
-          ):null,
+          sound: sound != null
+              ? RawResourceAndroidNotificationSound(sound)
+              : null,
         ),
       );
       tz.initializeTimeZones();
@@ -98,10 +105,9 @@ class LocalNotificationService {
         ),
         notificationDetails,
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-        
+        payload: payload,
       );
     } on Exception catch (e) {
-
       log(e.toString());
     }
   }

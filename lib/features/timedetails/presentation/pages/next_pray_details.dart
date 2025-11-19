@@ -1,10 +1,8 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:quran/core/utils/fonts_guid.dart';
 import 'package:quran/core/utils/screen_size.dart';
-import 'package:quran/features/homescreen/presentation/cubit/location_cubit.dart';
 import 'package:quran/features/homescreen/presentation/cubit/nextpray_cubit.dart';
 import 'package:quran/features/timedetails/cubit/fetchprayer_cubit.dart';
 import 'package:quran/features/timedetails/presentation/widgets/pary_widget.dart';

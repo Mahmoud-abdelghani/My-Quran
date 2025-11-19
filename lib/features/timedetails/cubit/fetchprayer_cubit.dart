@@ -1,13 +1,9 @@
-import 'dart:collection';
 
 import 'package:bloc/bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:quran/core/api/api_concumer.dart';
-import 'package:quran/core/api/dio_concumer.dart';
-import 'package:quran/core/api/end_points.dart';
 import 'package:quran/core/errors/server_exception.dart';
-import 'package:quran/features/timedetails/data/models/pray_model.dart';
 import 'package:quran/features/timedetails/data/models/prayers_times_model.dart';
 
 part 'fetchprayer_state.dart';

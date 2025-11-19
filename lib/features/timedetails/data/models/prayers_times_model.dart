@@ -7,14 +7,14 @@ class PrayersTimesModel {
   PrayersTimesModel({required this.prayers, required this.dayDate});
   factory PrayersTimesModel.fromJson(Map<String, dynamic> json) {
     return PrayersTimesModel(
-      dayDate: json[apiKeys.data][apiKeys.date][apiKeys.readable],
-      prayers: List.generate(json[apiKeys.data][apiKeys.timings].length, (
+      dayDate: json[ApiKeys.data][ApiKeys.date][ApiKeys.readable],
+      prayers: List.generate(json[ApiKeys.data][ApiKeys.timings].length, (
         index,
       ) {
         return PrayModel.fromJson({
-          json[apiKeys.data][apiKeys.timings].entries
+          json[ApiKeys.data][ApiKeys.timings].entries
               .elementAt(index)
-              .key: json[apiKeys.data][apiKeys.timings].entries
+              .key: json[ApiKeys.data][ApiKeys.timings].entries
               .elementAt(index)
               .value,
         });

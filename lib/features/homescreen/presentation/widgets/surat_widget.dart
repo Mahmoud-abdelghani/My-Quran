@@ -35,7 +35,7 @@ class SuratWidget extends StatelessWidget {
             ),
           );
         } else if (state is QuranFetchingError) {
-          return Expanded(child: Text(state.message));
+          return Expanded(child: Center(child: Text(state.message)));
         } else {
           return Expanded(child: Text("error"));
         }

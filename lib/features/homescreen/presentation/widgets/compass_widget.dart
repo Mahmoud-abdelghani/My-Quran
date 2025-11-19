@@ -13,6 +13,7 @@ class CompassWidget extends StatefulWidget {
 
 class _QiblaCompassState extends State<CompassWidget> {
   double? qiblaAngle;
+  bool setStateOption = true;
 
   @override
   void initState() {
@@ -23,9 +24,17 @@ class _QiblaCompassState extends State<CompassWidget> {
   Future<void> getQiblaDirection() async {
     final position = await Geolocator.getCurrentPosition();
     Coordinate user = Coordinate(position.latitude, position.longitude);
-    setState(() {
-      qiblaAngle = QiblaDirection.find(user);
-    });
+    if (setStateOption) {
+      setState(() {
+        qiblaAngle = QiblaDirection.find(user);
+      });
+    }
+  }
+
+  @override
+  void dispose() async {
+    super.dispose();
+    setStateOption = !setStateOption;
   }
 
   @override
@@ -38,10 +47,7 @@ class _QiblaCompassState extends State<CompassWidget> {
                 stream: FlutterCompass.events,
                 builder: (context, snapshot) {
                   if (!snapshot.hasData || snapshot.data!.heading == null) {
-                    return Text(
-                      "No Compass Sensor",
-                      style: TextStyle(color: Colors.red),
-                    );
+                    return SizedBox();
                   }
 
                   double deviceAngle = snapshot.data!.heading!;
@@ -49,17 +55,17 @@ class _QiblaCompassState extends State<CompassWidget> {
 
                   return Center(
                     child: CustomPaint(
-                      painter: _CompassPainter(angle),
+                      painter: _CompassPainter(angle, context),
                       child: SizedBox(
                         width: 280,
                         height: 280,
                         child: Center(
                           child: Text(
                             "${deviceAngle.toStringAsFixed(0)}°",
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                              color: Theme.of(context).primaryColorDark,
                             ),
                           ),
                         ),
@@ -75,8 +81,9 @@ class _QiblaCompassState extends State<CompassWidget> {
 
 class _CompassPainter extends CustomPainter {
   final double angle;
+  BuildContext context;
 
-  _CompassPainter(this.angle);
+  _CompassPainter(this.angle, this.context);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -84,12 +91,12 @@ class _CompassPainter extends CustomPainter {
     final radius = size.width * 0.43;
 
     final paintCircle = Paint()
-      ..color = Colors.white
+      ..color = Colors.transparent
       ..style = PaintingStyle.fill
       ..strokeWidth = 3;
 
     final paintBorder = Paint()
-      ..color = const Color(0xff9543FF)
+      ..color = Theme.of(context).primaryColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = 6;
 
@@ -98,7 +105,7 @@ class _CompassPainter extends CustomPainter {
 
     // Draw Qibla arrow
     final paintArrow = Paint()
-      ..color = const Color(0xff9543FF)
+      ..color = Theme.of(context).primaryColor
       ..style = PaintingStyle.fill;
 
     double arrowLength = radius * 0.8;

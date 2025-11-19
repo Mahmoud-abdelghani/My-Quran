@@ -13,12 +13,12 @@ class NextdayModel {
   });
   factory NextdayModel.fromJson(Map<String, dynamic> json) {
     return NextdayModel(
-      dayDate: json[apiKeys.data][apiKeys.date][apiKeys.readable],
+      dayDate: json[ApiKeys.data][ApiKeys.date][ApiKeys.readable],
       month:
-          json[apiKeys.data][apiKeys.date][apiKeys.hijri][apiKeys.month][apiKeys
+          json[ApiKeys.data][ApiKeys.date][ApiKeys.hijri][ApiKeys.month][ApiKeys
               .en],
-      date: json[apiKeys.data][apiKeys.date][apiKeys.hijri][apiKeys.date],
-      nextPray: json[apiKeys.data][apiKeys.timings],
+      date: json[ApiKeys.data][ApiKeys.date][ApiKeys.hijri][ApiKeys.date],
+      nextPray: json[ApiKeys.data][ApiKeys.timings],
     );
   }
 }
