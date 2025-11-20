@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:quran/core/utils/color_guid.dart';
 import 'package:quran/core/utils/fonts_guid.dart';
 import 'package:quran/core/utils/screen_size.dart';
 

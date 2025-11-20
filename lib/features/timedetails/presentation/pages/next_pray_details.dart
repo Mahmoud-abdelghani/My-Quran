@@ -69,7 +69,7 @@ class _NextPrayDetailsState extends State<NextPrayDetails> {
                       ),
                     );
                   } else if (state is FetchprayerSuccess) {
-                    print(state.prayers.prayers);
+                    
                     return Expanded(
                       child: ListView.builder(
                         itemCount: state.prayers.prayers.length,

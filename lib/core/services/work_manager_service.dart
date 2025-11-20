@@ -16,8 +16,6 @@ class WorkManagerService {
   static workManagerInitializetion() {
     Workmanager().initialize(callbackDispatcher);
     registerTasks();
-    log('donees');
-    log("callbackDispatcher started");
   }
 
   static void registerTasks() {
@@ -35,6 +33,9 @@ class WorkManagerService {
       Workmanager().registerPeriodicTask(
         "El_salah_ala_El_nabi",
         "El_salah_ala_El_nabi",
+        inputData: {
+          'avilable':bool.parse(CacheHelper.getString('avilable')!)
+        },
         frequency: Duration(hours: 1),
       );
       Workmanager().registerPeriodicTask(
@@ -61,7 +62,6 @@ class WorkManagerService {
 
 @pragma('vm:entry-point')
 void callbackDispatcher() {
-  log("callbackDispatcher started");
   Workmanager().executeTask((taskName, inputData) async {
     switch (taskName) {
       case 'azkr_El_sabah':
@@ -75,8 +75,7 @@ void callbackDispatcher() {
             hour: 9,
             min: 0,
             sound: null,
-            payload: 
-            "El_Sabah"
+            payload: "El_Sabah",
           );
           break;
         }
@@ -89,19 +88,21 @@ void callbackDispatcher() {
             body: "لا تنسي اذكار المساء",
             hour: 17,
             min: 0,
-            payload: "El_Massa"
+            payload: "El_Massa",
           );
           break;
         }
       case "El_salah_ala_El_nabi":
         {
-          await LocalNotificationService().showBasicNotifications();
+          if(inputData!['avilable']){
+             await LocalNotificationService().showBasicNotifications();
+          }
           break;
         }
       case "El_salah":
         {
           WidgetsFlutterBinding.ensureInitialized();
-          log("taskName = $taskName");
+
           try {
             LocalNotificationService().cancelNotificationById(5);
             String address = inputData!['address'] ?? "egypt";
@@ -119,19 +120,13 @@ void callbackDispatcher() {
             int min = int.parse(
               nextdayModel.nextPray.values.first.toString().split(':').last,
             );
-            
 
-            if (min >= 5) {
-              min -= 5;
+            if (min >= 7) {
+              min -= 7;
             } else {
               hours--;
-              min = 60 +min-5;
+              min = 60 + min - 7;
             }
-
-            log("min: $min, hours : $hours");
-            log(
-              'body : ${inputData[nextdayModel.nextPray.keys.first]}, sound: ${nextdayModel.nextPray.keys.first.toLowerCase()}',
-            );
 
             await LocalNotificationService().showSchadualedNotification(
               id: 5,
@@ -140,9 +135,8 @@ void callbackDispatcher() {
               hour: hours,
               min: min,
               sound: nextdayModel.nextPray.keys.first.toLowerCase(),
-              payload: 'El_Salah'
+              payload: 'El_Salah',
             );
-            log('donees');
           } on ServerException catch (e) {
             log(e.toString());
           }

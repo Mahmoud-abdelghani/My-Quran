@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quran/core/cubit/theme_cubit.dart';
 import 'package:quran/core/services/local_notification_service.dart';
 import 'package:quran/core/utils/screen_size.dart';
 import 'package:quran/features/homescreen/presentation/widgets/azkar_m_widget.dart';
@@ -75,30 +76,38 @@ class _HomeViewState extends State<HomeView> {
                   },
 
                   child: context.read<AudioPlayerCubit>().isPlaying!
-                      ? Icon(Icons.pause)
-                      : Icon(Icons.play_arrow),
+                      ? Icon(Icons.pause,color: Theme.of(context).primaryColorDark,)
+                      : Icon(Icons.play_arrow,color:  Theme.of(context).primaryColorDark),
                 ),
 
           body: Stack(
             children: [
               Positioned(
                 bottom: 0,
-                child: Image.asset(
-                  ThemeMode.values.first == ThemeMode.light
-                      ? 'assets/images/backgrounf.png'
-                      : 'assets/images/backgrounfdark.png',
-                  width: ScreenSize.width,
-                  height: ScreenSize.hight * 0.4,
-                  fit: BoxFit.fill,
+                child: BlocBuilder<ThemeCubit, ThemeMode>(
+                  builder: (context, state) {
+                    return Image.asset(
+                      state == ThemeMode.light
+                          ? 'assets/images/backgrounf.png'
+                          : 'assets/images/backgrounfdark.png',
+                      width: ScreenSize.width,
+                      height: ScreenSize.hight * 0.4,
+                      fit: BoxFit.fill,
+                    );
+                  },
                 ),
               ),
-              Image.asset(
-                ThemeMode.values.first == ThemeMode.light
-                    ? 'assets/images/BG Mobile.png'
-                    : 'assets/images/BG Mobiledark.png',
-                width: ScreenSize.width,
-                height: ScreenSize.hight * 0.38,
-                fit: BoxFit.fill,
+              BlocBuilder<ThemeCubit, ThemeMode>(
+                builder: (context, state) {
+                  return Image.asset(
+                    state == ThemeMode.light
+                        ? 'assets/images/BG Mobile.png'
+                        : 'assets/images/BG Mobiledark.png',
+                    width: ScreenSize.width,
+                    height: ScreenSize.hight * 0.38,
+                    fit: BoxFit.fill,
+                  );
+                },
               ),
               Padding(
                 padding: EdgeInsets.only(left: ScreenSize.width * 0.03),
@@ -109,7 +118,7 @@ class _HomeViewState extends State<HomeView> {
                     SizedBox(height: ScreenSize.hight * .02),
                     SizedBox(
                       width: ScreenSize.width,
-                      height: ScreenSize.hight * 0.06,
+                      height: ScreenSize.hight * 0.07,
                       child: ListView.separated(
                         controller: scrollController,
                         scrollDirection: Axis.horizontal,

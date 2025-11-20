@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quran/core/utils/color_guid.dart';
 import 'package:quran/core/utils/fonts_guid.dart';
 import 'package:quran/core/utils/screen_size.dart';
 import 'package:quran/features/surahdetails/presentation/widgets/aya_widget.dart';

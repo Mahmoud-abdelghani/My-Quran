@@ -6,9 +6,14 @@ import 'package:quran/features/homescreen/presentation/widgets/surah_widget.dart
 import 'package:quran/features/surahdetails/presentation/cubit/full_surah_cubit.dart';
 import 'package:quran/features/surahdetails/presentation/pages/surah_view.dart';
 
-class SuratWidget extends StatelessWidget {
+class SuratWidget extends StatefulWidget {
   const SuratWidget({super.key});
 
+  @override
+  State<SuratWidget> createState() => _SuratWidgetState();
+}
+
+class _SuratWidgetState extends State<SuratWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<QuranCubit, QuranState>(
@@ -20,9 +25,11 @@ class SuratWidget extends StatelessWidget {
             child: ListView.separated(
               itemBuilder: (context, index) => SurahWidget(
                 onTap: () {
-          BlocProvider.of<FullSurahCubit>(context).getFullSurah(index+1);
-          Navigator.pushNamed(context, SurahView.routeName);
-        },
+                  BlocProvider.of<FullSurahCubit>(
+                    context,
+                  ).getFullSurah(index + 1);
+                  Navigator.pushNamed(context, SurahView.routeName);
+                },
                 num: index + 1,
                 title: context.read<QuranCubit>().surs[index].nameInEn,
                 ayat: context.read<QuranCubit>().surs[index].ayatnum.toString(),
@@ -35,7 +42,25 @@ class SuratWidget extends StatelessWidget {
             ),
           );
         } else if (state is QuranFetchingError) {
-          return Expanded(child: Center(child: Text(state.message)));
+          return Expanded(
+            child: Center(
+              child: Column(
+                children: [
+                  Text(state.message),
+                  IconButton(
+                    onPressed: () {
+                      BlocProvider.of<QuranCubit>(context).fetchQuran();
+                      setState(() {});
+                    },
+                    icon: Icon(
+                      Icons.refresh,
+                      color: Theme.of(context).primaryColorDark,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
         } else {
           return Expanded(child: Text("error"));
         }

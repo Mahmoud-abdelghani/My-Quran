@@ -1,9 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:quran/core/api/dio_concumer.dart';
 import 'package:quran/core/api/end_points.dart';
+import 'package:quran/core/cubit/theme_cubit.dart';
 import 'package:quran/core/database/cache_helper.dart';
 import 'package:quran/core/utils/app_theme.dart';
 
@@ -24,10 +27,16 @@ import 'package:quran/features/tafseer/presentation/cubit/get_tafseer_cubit.dart
 import 'package:quran/features/tafseer/presentation/pages/full_tafseer.dart';
 import 'package:quran/features/tafseer/presentation/pages/surah_tafseer_view.dart';
 import 'package:quran/features/timedetails/cubit/fetchprayer_cubit.dart';
+import 'package:quran/features/timedetails/cubit/notification_memory_cubit.dart';
 import 'package:quran/features/timedetails/presentation/pages/next_pray_details.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: HydratedStorageDirectory(
+      (await getApplicationDocumentsDirectory()).path,
+    ),
+  );
   await CacheHelper.init();
   runApp(MyApp());
 }
@@ -88,23 +97,32 @@ class MyApp extends StatelessWidget {
           ),
         ),
         BlocProvider(create: (context) => TasspehCubit()),
+        BlocProvider(create: (context) => ThemeCubit()),
+        BlocProvider(
+          create: (context) => NotificationMemoryCubit(),
+          
+        )
       ],
 
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        routes: {
-          SplachView.routeName: (context) => SplachView(),
-          HomeView.routeName: (context) => HomeView(),
-          NextPrayDetails.routeName: (context) => NextPrayDetails(),
-          SurahView.routeName: (context) => SurahView(),
-          PlayerView.routeName: (context) => PlayerView(),
-          SurahTafseerView.routeName: (context) => SurahTafseerView(),
-          FullTafseer.routeName: (context) => FullTafseer(),
+      child: BlocBuilder<ThemeCubit, ThemeMode>(
+        builder: (context, state) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            routes: {
+              SplachView.routeName: (context) => SplachView(),
+              HomeView.routeName: (context) => HomeView(),
+              NextPrayDetails.routeName: (context) => NextPrayDetails(),
+              SurahView.routeName: (context) => SurahView(),
+              PlayerView.routeName: (context) => PlayerView(),
+              SurahTafseerView.routeName: (context) => SurahTafseerView(),
+              FullTafseer.routeName: (context) => FullTafseer(),
+            },
+            initialRoute: SplachView.routeName,
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            themeMode: state,
+          );
         },
-        initialRoute: SplachView.routeName,
-        theme: lightTheme,
-        darkTheme: darkTheme,
-        themeMode: ThemeMode.dark,
       ),
     );
   }

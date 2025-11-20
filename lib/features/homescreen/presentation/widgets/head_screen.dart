@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:quran/core/utils/color_guid.dart';
 import 'package:quran/core/utils/fonts_guid.dart';
 import 'package:quran/core/utils/screen_size.dart';
 import 'package:quran/features/homescreen/presentation/cubit/location_cubit.dart';
@@ -9,9 +8,14 @@ import 'package:quran/features/homescreen/presentation/cubit/nextpray_cubit.dart
 import 'package:quran/features/timedetails/cubit/fetchprayer_cubit.dart';
 import 'package:quran/features/timedetails/presentation/pages/next_pray_details.dart';
 
-class HeadScreen extends StatelessWidget {
+class HeadScreen extends StatefulWidget {
   const HeadScreen({super.key});
 
+  @override
+  State<HeadScreen> createState() => _HeadScreenState();
+}
+
+class _HeadScreenState extends State<HeadScreen> {
   @override
   Widget build(BuildContext context) {
     ScreenSize.init(context);
@@ -109,7 +113,24 @@ class HeadScreen extends StatelessWidget {
             ),
           );
         } else {
-          return Text("error");
+          return SizedBox(
+            height: ScreenSize.hight * 0.35,
+            width: ScreenSize.width * 0.4,
+            child: Center(
+              child: IconButton(
+                onPressed: () {
+                  BlocProvider.of<NextprayCubit>(context).getTheNext(
+                    address: context.read<LocationCubit>().address.toString(),
+                  );
+                  setState(() {});
+                },
+                icon: Icon(
+                  Icons.refresh,
+                  color: Theme.of(context).primaryColorDark,
+                ),
+              ),
+            ),
+          );
         }
       },
     );

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:quran/core/utils/color_guid.dart';
 
 class AyatMinu extends StatelessWidget {
   const AyatMinu({super.key, required this.value, required this.onTap});

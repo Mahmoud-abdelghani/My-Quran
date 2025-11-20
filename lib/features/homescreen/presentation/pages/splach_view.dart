@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:quran/core/database/cache_helper.dart';
 import 'package:quran/core/services/local_notification_service.dart';
 import 'package:quran/core/services/work_manager_service.dart';
 import 'package:quran/core/utils/color_guid.dart';
@@ -12,6 +13,7 @@ import 'package:quran/core/utils/screen_size.dart';
 import 'package:quran/features/homescreen/presentation/cubit/location_cubit.dart';
 import 'package:quran/features/homescreen/presentation/cubit/nextpray_cubit.dart';
 import 'package:quran/features/homescreen/presentation/pages/home_view.dart';
+import 'package:quran/features/timedetails/cubit/notification_memory_cubit.dart';
 import 'package:quran/main.dart';
 
 class SplachView extends StatefulWidget {
@@ -48,7 +50,6 @@ class _SplachViewState extends State<SplachView> {
                   Text(
                     "My Quran",
                     style: TextStyle(
-                      
                       fontFamily: FontsGuid.poppins,
                       fontSize: ScreenSize.hight * 0.055,
                       color: Theme.of(context).primaryColor,
@@ -65,35 +66,45 @@ class _SplachViewState extends State<SplachView> {
                     ),
                   ),
                   Spacer(flex: 3),
-                  ElevatedButton(
-                    onPressed: () async {
-                      try {
-                        await insureNotificationsPermissions();
-                        await LocalNotificationService().initNotifications();
-                        await WorkManagerService.workManagerInitializetion();
-                        await BlocProvider.of<LocationCubit>(
-                          context,
-                        ).getLocation();
-                      } on Exception catch (e) {
-                        
-                        log(e.toString());
-                      }
+                  BlocBuilder<NotificationMemoryCubit, bool>(
+                    builder: (context, state) {
+                      return ElevatedButton(
+                        onPressed: () async {
+                          try {
+                           await CacheHelper.storeString(
+                              'avilable',
+                              state.toString(),
+                            );
+                            await insureNotificationsPermissions();
+                            await LocalNotificationService()
+                                .initNotifications();
+                            await WorkManagerService.workManagerInitializetion();
+                            if (!mounted) return;
+                            await BlocProvider.of<LocationCubit>(
+                              // ignore: use_build_context_synchronously
+                              context,
+                            ).getLocation();
+                          } on Exception catch (e) {
+                            log(e.toString());
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          fixedSize: Size(
+                            ScreenSize.width * 0.48,
+                            ScreenSize.hight * 0.07,
+                          ),
+                        ),
+                        child: Text(
+                          "Read Now",
+                          style: TextStyle(
+                            fontSize: ScreenSize.hight * 0.02,
+                            color: Theme.of(context).primaryColorLight,
+                            fontFamily: FontsGuid.poppins,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      );
                     },
-                    style: ElevatedButton.styleFrom(
-                      fixedSize: Size(
-                        ScreenSize.width * 0.48,
-                        ScreenSize.hight * 0.07,
-                      ),
-                    ),
-                    child: Text(
-                      "Read Now",
-                      style: TextStyle(
-                        fontSize: ScreenSize.hight * 0.02,
-                        color: Theme.of(context).primaryColorLight,
-                        fontFamily: FontsGuid.poppins,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
                   ),
                   Spacer(flex: 1),
                 ],

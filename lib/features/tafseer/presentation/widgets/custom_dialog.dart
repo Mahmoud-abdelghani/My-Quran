@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quran/core/utils/color_guid.dart';
 import 'package:quran/core/utils/fonts_guid.dart';
 import 'package:quran/core/utils/screen_size.dart';
 import 'package:quran/features/tafseer/presentation/cubit/get_tafseer_cubit.dart';
@@ -112,6 +111,7 @@ class _CustomDialogState extends State<CustomDialog> {
                 "من",
                 style: TextStyle(
                   fontSize: ScreenSize.hight * 0.02,
+                  color: Theme.of(context).primaryColorDark,
                   fontFamily: FontsGuid.quranFont,
                 ),
               ),
@@ -128,6 +128,7 @@ class _CustomDialogState extends State<CustomDialog> {
                 "الى",
                 style: TextStyle(
                   fontSize: ScreenSize.hight * 0.02,
+                  color: Theme.of(context).primaryColorDark,
                   fontFamily: FontsGuid.quranFont,
                 ),
               ),

@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:quran/core/utils/fonts_guid.dart';
 import 'package:quran/core/utils/screen_size.dart';
 import 'package:quran/features/homescreen/presentation/cubit/location_cubit.dart';
+import 'package:quran/features/timedetails/presentation/widgets/my_custom_settings_dialog.dart';
 
 class TimeScreenLeading extends StatelessWidget {
   const TimeScreenLeading({super.key});
@@ -47,9 +48,15 @@ class TimeScreenLeading extends StatelessWidget {
               ),
             ],
           ),
-          Icon(
-            Icons.notifications,
-            size: ScreenSize.width * 0.25,
+          IconButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => MyCustomSettingsDialog(),
+              );
+            },
+            icon: Icon(Icons.settings, size: ScreenSize.width * 0.25),
+
             color: Colors.white,
           ),
         ],

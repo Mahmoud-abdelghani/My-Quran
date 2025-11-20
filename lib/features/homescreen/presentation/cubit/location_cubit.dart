@@ -19,7 +19,6 @@ class LocationCubit extends Cubit<LocationState> {
     if (!serviceEnabled) {
       emit(LocationError("enable Lcation"));
     }
-    print("1");
     locationPermission = await Geolocator.checkPermission();
     if (locationPermission == LocationPermission.denied) {
       locationPermission = await Geolocator.requestPermission();

@@ -1,7 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quran/core/utils/color_guid.dart';
+import 'package:quran/core/cubit/theme_cubit.dart';
 import 'package:quran/core/utils/fonts_guid.dart';
 import 'package:quran/core/utils/screen_size.dart';
 import 'package:quran/features/surahdetails/presentation/cubit/audio_player_cubit.dart';
@@ -31,13 +31,17 @@ class _PlayerViewState extends State<PlayerView> {
       backgroundColor: Color(0xff140038),
       body: Stack(
         children: [
-          Image.asset(
-            ThemeMode.values.first == ThemeMode.light
-                ? "assets/images/BG Mobile2.png"
-                : "assets/images/BG MobileDark2.png",
-            width: ScreenSize.width,
-            height: ScreenSize.hight * 0.596,
-            fit: BoxFit.fill,
+          BlocBuilder<ThemeCubit, ThemeMode>(
+            builder: (context, state) {
+              return Image.asset(
+                state == ThemeMode.light
+                    ? "assets/images/BG Mobile2.png"
+                    : "assets/images/BG MobileDark2.png",
+                width: ScreenSize.width,
+                height: ScreenSize.hight * 0.596,
+                fit: BoxFit.fill,
+              );
+            },
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -80,6 +84,7 @@ class _PlayerViewState extends State<PlayerView> {
                       }
 
                       duration =
+                          // ignore: use_build_context_synchronously
                           await context
                               .read<AudioPlayerCubit>()
                               .player
@@ -257,12 +262,14 @@ class _PlayerViewState extends State<PlayerView> {
                         ).then((value) async {
                           audioUrl = value;
                           if (value != null) {
+                            // ignore: use_build_context_synchronously
                             await context.read<AudioPlayerCubit>().playAudio(
                               audioUrl!,
                               qaree,
                             );
 
                             duration =
+                                // ignore: use_build_context_synchronously
                                 await context
                                     .read<AudioPlayerCubit>()
                                     .player
