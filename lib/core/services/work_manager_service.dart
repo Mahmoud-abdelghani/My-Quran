@@ -33,9 +33,7 @@ class WorkManagerService {
       Workmanager().registerPeriodicTask(
         "El_salah_ala_El_nabi",
         "El_salah_ala_El_nabi",
-        inputData: {
-          'avilable':bool.parse(CacheHelper.getString('avilable')!)
-        },
+        inputData: {'avilable': bool.parse(CacheHelper.getString('avilable')!)},
         frequency: Duration(hours: 1),
       );
       Workmanager().registerPeriodicTask(
@@ -94,8 +92,8 @@ void callbackDispatcher() {
         }
       case "El_salah_ala_El_nabi":
         {
-          if(inputData!['avilable']){
-             await LocalNotificationService().showBasicNotifications();
+          if (inputData!['avilable']) {
+            await LocalNotificationService().showBasicNotifications();
           }
           break;
         }
@@ -121,11 +119,11 @@ void callbackDispatcher() {
               nextdayModel.nextPray.values.first.toString().split(':').last,
             );
 
-            if (min >= 7) {
-              min -= 7;
+            if (min >= 9) {
+              min -= 9;
             } else {
               hours--;
-              min = 60 + min - 7;
+              min = 60 + min - 9;
             }
 
             await LocalNotificationService().showSchadualedNotification(

@@ -32,32 +32,30 @@ class _SurahViewState extends State<SurahTafseerView> {
           ),
         ),
       ),
-      body: Expanded(
-        child: ListView.separated(
-          itemBuilder: (context, index) => SurahWidget(
-            onTap: () {
-              showAdaptiveDialog(
-                context: context,
-                builder: (context) => CustomDialog(
-                  location: context.read<QuranCubit>().surs[index].place,
-                  nameInEng: context.read<QuranCubit>().surs[index].nameInEn,
-                  bookId: int.parse(tafseerTypeModel.id),
-                  surahId: index + 1,
-                  ayatNum: context.read<QuranCubit>().surs[index].ayatnum,
-                ),
-              );
-              
-            },
-            title: context.read<QuranCubit>().surs[index].nameInEn,
-            ayat: context.read<QuranCubit>().surs[index].ayatnum.toString(),
-            nameInArabic: context.read<QuranCubit>().surs[index].nameInAr,
-            place: context.read<QuranCubit>().surs[index].place,
-            num: index + 1,
-          ),
-          separatorBuilder: (context, index) =>
-              SizedBox(height: ScreenSize.hight * 0.02),
-          itemCount: context.read<QuranCubit>().surs.length,
+      body: ListView.separated(
+        itemBuilder: (context, index) => SurahWidget(
+          onTap: () {
+            showAdaptiveDialog(
+              context: context,
+              builder: (context) => CustomDialog(
+                location: context.read<QuranCubit>().surs[index].place,
+                nameInEng: context.read<QuranCubit>().surs[index].nameInEn,
+                bookId: int.parse(tafseerTypeModel.id),
+                surahId: index + 1,
+                ayatNum: context.read<QuranCubit>().surs[index].ayatnum,
+              ),
+            );
+            
+          },
+          title: context.read<QuranCubit>().surs[index].nameInEn,
+          ayat: context.read<QuranCubit>().surs[index].ayatnum.toString(),
+          nameInArabic: context.read<QuranCubit>().surs[index].nameInAr,
+          place: context.read<QuranCubit>().surs[index].place,
+          num: index + 1,
         ),
+        separatorBuilder: (context, index) =>
+            SizedBox(height: ScreenSize.hight * 0.02),
+        itemCount: context.read<QuranCubit>().surs.length,
       ),
     );
   }

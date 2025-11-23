@@ -71,7 +71,7 @@ class _SplachViewState extends State<SplachView> {
                       return ElevatedButton(
                         onPressed: () async {
                           try {
-                           await CacheHelper.storeString(
+                            await CacheHelper.storeString(
                               'avilable',
                               state.toString(),
                             );
@@ -118,7 +118,6 @@ class _SplachViewState extends State<SplachView> {
           BlocProvider.of<NextprayCubit>(
             context,
           ).getTheNext(address: state.address);
-
           Navigator.pushReplacementNamed(context, HomeView.routeName);
         } else if (state is LocationError) {
           ScaffoldMessenger.of(

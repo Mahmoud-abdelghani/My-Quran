@@ -6,8 +6,8 @@ import 'package:quran/features/homescreen/presentation/widgets/tafseer_type_widg
 import 'package:quran/features/tafseer/presentation/pages/surah_tafseer_view.dart';
 
 class TafserWidget extends StatelessWidget {
-  const TafserWidget({super.key});
-
+  const TafserWidget({super.key, required this.context2});
+ final BuildContext context2;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TafseerCubit, TafseerState>(
@@ -20,7 +20,11 @@ class TafserWidget extends StatelessWidget {
               itemCount: state.tafseerBooks.length,
               itemBuilder: (context, index) => TafseerTypeWidget(
                 onTap: () {
-                  Navigator.pushNamed(context, SurahTafseerView.routeName,arguments: state.tafseerBooks[index]);
+                  Navigator.pushNamed(
+                    context2,
+                    SurahTafseerView.routeName,
+                    arguments: state.tafseerBooks[index],
+                  );
                 },
                 num: state.tafseerBooks[index].id,
                 languge: state.tafseerBooks[index].language,

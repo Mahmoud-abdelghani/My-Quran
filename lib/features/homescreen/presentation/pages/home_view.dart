@@ -145,7 +145,7 @@ class _HomeViewState extends State<HomeView> {
                       ),
                     ),
                     if (buttonsStates.elementAt(0)) SuratWidget(),
-                    if (buttonsStates.elementAt(1)) TafserWidget(),
+                    if (buttonsStates.elementAt(1)) TafserWidget(context2: context,),
                     if (buttonsStates.elementAt(2)) CompassWidget(),
                     if (buttonsStates.elementAt(3)) SephaWidget(),
                     if (buttonsStates.elementAt(4)) AzkarSWidget(),

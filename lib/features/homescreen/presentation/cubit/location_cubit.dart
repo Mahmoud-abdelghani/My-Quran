@@ -34,6 +34,7 @@ class LocationCubit extends Cubit<LocationState> {
     List<Placemark> places = await placemarkFromCoordinates(
       position.latitude,
       position.longitude,
+      
     ).timeout(const Duration(seconds: 15));
     Placemark place = places.first;
     loction = place.administrativeArea;
