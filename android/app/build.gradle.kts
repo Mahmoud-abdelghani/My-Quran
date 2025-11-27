@@ -6,8 +6,9 @@ plugins {
 
 android {
     namespace = "com.mahmoud.quran"
-    compileSdk = 35
-    ndkVersion = "27.0.12077973"
+    compileSdk = 36
+    buildToolsVersion = "36.1.0"
+    ndkVersion = "29.0.14206865"
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
@@ -21,7 +22,7 @@ android {
 
     defaultConfig {
         applicationId = "com.mahmoud.quran"
-        minSdk = 21
+        minSdk = flutter.minSdkVersion
         targetSdk = 35
         versionCode = 1
         versionName = "1.0.0"
@@ -46,6 +47,11 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+             getByName("release") {
+            ndk {
+                debugSymbolLevel = "SYMBOL_TABLE"
+            }
+        }
         }
     }
 }
