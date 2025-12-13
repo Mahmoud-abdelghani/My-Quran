@@ -15,6 +15,7 @@ class TimeScreenLeading extends StatelessWidget {
       padding: EdgeInsets.only(top: ScreenSize.hight * 0.03),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
+        
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,12 +30,12 @@ class TimeScreenLeading extends StatelessWidget {
                 ),
               ),
               Text(
-                context.read<LocationCubit>().loction.toString().split(' ')[0],
+                context.read<LocationCubit>().loction.toString(),
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: FontsGuid.poppins,
                   fontWeight: FontWeight.bold,
-                  fontSize: ScreenSize.hight * 0.03,
+                  fontSize: ScreenSize.hight * 0.015,
                 ),
               ),
               Text(

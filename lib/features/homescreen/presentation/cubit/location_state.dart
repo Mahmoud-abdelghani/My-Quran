@@ -9,7 +9,8 @@ final class LocationLoading extends LocationState {}
 
 final class LocationSuccess extends LocationState {
   final String address;
-  LocationSuccess({required this.address});
+  final String zone;
+  LocationSuccess({required this.address, required this.zone});
 }
 
 final class LocationError extends LocationState {

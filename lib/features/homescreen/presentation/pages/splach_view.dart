@@ -117,7 +117,7 @@ class _SplachViewState extends State<SplachView> {
         if (state is LocationSuccess) {
           BlocProvider.of<NextprayCubit>(
             context,
-          ).getTheNext(address: state.address);
+          ).getTheNext(address: state.address,zone: state.zone);
           Navigator.pushReplacementNamed(context, HomeView.routeName);
         } else if (state is LocationError) {
           ScaffoldMessenger.of(

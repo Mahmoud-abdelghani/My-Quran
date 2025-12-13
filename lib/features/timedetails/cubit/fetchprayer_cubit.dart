@@ -17,11 +17,11 @@ class FetchprayerCubit extends Cubit<FetchprayerState> {
     "assets/images/sunrise (1).png",
   ];
   List<String> prayers = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"];
-  getPrayers({required String city, required String country}) async {
+  getPrayers({required String city, required String country,required String zone}) async {
     try {
       emit(FetchprayerLoading());
       final response = await api.get(
-        '${DateFormat('yy-MM-dd').format(DateTime.now())}?city=$city&country=$country&method=5&timezonestring=Africa/Cairo',
+        '${DateFormat('yy-MM-dd').format(DateTime.now())}?city=$city&country=$country&method=5&timezonestring=$zone',
       );
       emit(FetchprayerSuccess(prayers: PrayersTimesModel.fromJson(response)));
     } on ServerException catch (e) {

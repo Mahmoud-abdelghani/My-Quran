@@ -12,12 +12,12 @@ class NextprayCubit extends Cubit<NextprayState> {
   NextprayCubit(this.api) : super(NextprayInitial());
   ApiConcumer api;
   NextdayModel? nextdayModel;
-  getTheNext({required String address}) async {
-    address = address == "مصر" ? "egypt" : "egypt";
+  getTheNext({required String address,required String zone}) async {
+    address = address == "مصر" ? "egypt" : address;
     try {
       emit(NextprayLoading());
       final json = await api.get(
-        '${DateFormat('yy-MM-dd').format(DateTime.now())}?address=$address&method=5&timezonestring=Africa/Cairo',
+        '${DateFormat('yy-MM-dd').format(DateTime.now())}?address=$address&method=5&timezonestring=$zone',
       );
       nextdayModel = NextdayModel.fromJson(json);
       emit(NextpraySuccess());

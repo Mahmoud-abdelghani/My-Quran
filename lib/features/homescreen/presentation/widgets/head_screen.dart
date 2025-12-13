@@ -81,6 +81,7 @@ class _HeadScreenState extends State<HeadScreen> {
                 MaterialButton(
                   onPressed: () {
                     BlocProvider.of<FetchprayerCubit>(context).getPrayers(
+                      zone: context.read<LocationCubit>().zone??"Africa/Cairo",
                       city: context.read<LocationCubit>().loction.toString(),
                       country: context.read<LocationCubit>().address.toString(),
                     );
@@ -121,6 +122,7 @@ class _HeadScreenState extends State<HeadScreen> {
                 onPressed: () {
                   BlocProvider.of<NextprayCubit>(context).getTheNext(
                     address: context.read<LocationCubit>().address.toString(),
+                    zone: context.read<LocationCubit>().zone??'Africa/Cairo'
                   );
                   setState(() {});
                 },

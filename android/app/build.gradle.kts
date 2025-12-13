@@ -24,7 +24,7 @@ android {
         applicationId = "com.mahmoud.quran"
         minSdk = flutter.minSdkVersion
         targetSdk = 35
-        versionCode = 1
+        versionCode = 3
         versionName = "1.0.0"
         multiDexEnabled = true
     }
@@ -41,7 +41,7 @@ android {
     buildTypes {
         release {
             signingConfig = signingConfigs.getByName("release")
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             isShrinkResources = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

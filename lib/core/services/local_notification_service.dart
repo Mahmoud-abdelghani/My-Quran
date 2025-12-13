@@ -58,10 +58,9 @@ class LocalNotificationService {
     String? sound,
   }) async {
     try {
-      
       NotificationDetails notificationDetails = NotificationDetails(
         android: AndroidNotificationDetails(
-          "id_s",
+          body,
           "schadueled",
           importance: Importance.max,
           priority: Priority.high,
@@ -73,10 +72,10 @@ class LocalNotificationService {
       tz.initializeTimeZones();
       final TimezoneInfo currentTimeZone =
           await FlutterTimezone.getLocalTimezone();
-    
+
       tz.setLocalLocation(tz.getLocation(currentTimeZone.identifier));
       final currentTime = tz.TZDateTime.now(tz.local);
-   
+
       if (currentTime.isAfter(
         tz.TZDateTime(
           tz.local,
@@ -89,7 +88,6 @@ class LocalNotificationService {
       )) {
         currentTime.add(Duration(days: 1));
       }
-     
 
       await flutterLocalNotificationsPlugin.zonedSchedule(
         id,

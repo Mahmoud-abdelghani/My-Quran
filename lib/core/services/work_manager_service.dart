@@ -44,6 +44,7 @@ class WorkManagerService {
               ? "egypt"
               : CacheHelper.getString('Location'),
 
+          'zone': CacheHelper.getString('Zone'),
           'Fajr': 'اقْتَرَبَتْ صَلَاةُ الْفَجْرِ',
           'Dhuhr': 'اقْتَرَبَتْ صَلَاةُ الظُّهْرِ',
           'Asr': 'اقْتَرَبَتْ صَلَاةُ الْعَصْرِ',
@@ -104,12 +105,13 @@ void callbackDispatcher() {
           try {
             LocalNotificationService().cancelNotificationById(5);
             String address = inputData!['address'] ?? "egypt";
+            String zone = inputData['zone'];
             ApiConcumer api = DioConcumer(
               baseUrl: EndPoints.baseUrlTimes,
               dio: Dio(),
             );
             final json = await api.get(
-              '${DateFormat('yy-MM-dd').format(DateTime.now())}?address=$address&method=5&timezonestring=Africa/Cairo',
+              '${DateFormat('yy-MM-dd').format(DateTime.now())}?address=$address&method=5&timezonestring=$zone',
             );
             NextdayModel? nextdayModel = NextdayModel.fromJson(json);
             int hours = int.parse(
