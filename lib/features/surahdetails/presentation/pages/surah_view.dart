@@ -1,11 +1,10 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran/core/utils/fonts_guid.dart';
 import 'package:quran/core/utils/screen_size.dart';
+import 'package:quran/features/homescreen/presentation/cubit/quran_cubit.dart';
 
 import 'package:quran/features/surahdetails/presentation/cubit/full_surah_cubit.dart';
-import 'package:quran/features/surahdetails/presentation/pages/player_view.dart';
 import 'package:quran/features/surahdetails/presentation/widgets/aya_widget.dart';
 
 class SurahView extends StatefulWidget {
@@ -17,33 +16,15 @@ class SurahView extends StatefulWidget {
 }
 
 class _SurahViewState extends State<SurahView> {
-  AudioPlayer player = AudioPlayer();
-
-  bool isPlaying = false;
   @override
   Widget build(BuildContext context) {
+    int surahIndex = ModalRoute.of(context)!.settings.arguments as int;
     return BlocBuilder<FullSurahCubit, FullSurahState>(
       builder: (context, state) {
         if (state is FullSurahLoading) {
           return Scaffold(body: Center(child: CircularProgressIndicator()));
         } else if (state is FullSurahSuccess) {
           return Scaffold(
-            floatingActionButton: FloatingActionButton(
-              heroTag: null,
-              child: isPlaying
-                  ? Icon(
-                      Icons.pause,
-                      color: Theme.of(context).primaryColorLight,
-                    )
-                  : Icon(
-                      Icons.play_arrow,
-                      color: Theme.of(context).primaryColorLight,
-                    ),
-              onPressed: () async {
-                Navigator.pushNamed(context, PlayerView.routeName);
-              },
-            ),
-
             body: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
@@ -53,7 +34,7 @@ class _SurahViewState extends State<SurahView> {
                       left: ScreenSize.width * 0.146,
                     ),
                     child: Text(
-                      state.fullSurahModel.name,
+                      'سورة ${context.read<QuranCubit>().surs[surahIndex - 1].nameInAr}',
                       style: TextStyle(
                         color: Theme.of(context).primaryColor,
                         fontSize: ScreenSize.hight * 0.05,
@@ -92,27 +73,16 @@ class _SurahViewState extends State<SurahView> {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      Text(
-                        "In the name of Allah, the Most Compassionate, the Most Merciful",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColorDark,
-                          fontSize: ScreenSize.hight * 0.03,
-                          fontFamily: FontsGuid.quranFont,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
+                      SizedBox(height: ScreenSize.hight * 0.05),
                     ],
                   ),
                 ),
-                SliverList.separated(
-                  separatorBuilder: (context, index) =>
-                      SizedBox(height: ScreenSize.hight * 0.05),
+                SliverList.builder(
                   itemBuilder: (context, index) => AyaWidget(
-                    tafseer: false,
-                    num: index + 1,
                     ayaAr: state.fullSurahModel.ayatInAr[index],
                     ayaEn: state.fullSurahModel.ayatInEn[index],
+                    num: index + 1,
+                    tafseer: false,
                   ),
                   itemCount: state.fullSurahModel.ayatInAr.length,
                 ),

@@ -32,30 +32,54 @@ class _SurahViewState extends State<SurahTafseerView> {
           ),
         ),
       ),
-      body: ListView.separated(
-        itemBuilder: (context, index) => SurahWidget(
-          onTap: () {
-            showAdaptiveDialog(
-              context: context,
-              builder: (context) => CustomDialog(
-                location: context.read<QuranCubit>().surs[index].place,
-                nameInEng: context.read<QuranCubit>().surs[index].nameInEn,
-                bookId: int.parse(tafseerTypeModel.id),
-                surahId: index + 1,
-                ayatNum: context.read<QuranCubit>().surs[index].ayatnum,
-              ),
-            );
-            
-          },
-          title: context.read<QuranCubit>().surs[index].nameInEn,
-          ayat: context.read<QuranCubit>().surs[index].ayatnum.toString(),
-          nameInArabic: context.read<QuranCubit>().surs[index].nameInAr,
-          place: context.read<QuranCubit>().surs[index].place,
-          num: index + 1,
-        ),
-        separatorBuilder: (context, index) =>
-            SizedBox(height: ScreenSize.hight * 0.02),
-        itemCount: context.read<QuranCubit>().surs.length,
+      body: Stack(
+        alignment: Alignment.topCenter,
+        children: [
+          Positioned(
+            bottom: ScreenSize.hight * 0.5,
+            right: 0,
+            child: Image.asset(
+              'assets/images/Shape-04.png',
+              width: ScreenSize.width * 0.5,
+              height: ScreenSize.hight * 0.4,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Positioned(
+            left: 0,
+            bottom: ScreenSize.hight * 0.1,
+            child: Image.asset(
+              'assets/images/Shape-07.png',
+              width: ScreenSize.width * 0.6,
+              height: ScreenSize.hight * 0.7,
+              fit: BoxFit.cover,
+            ),
+          ),
+          ListView.separated(
+            itemBuilder: (context, index) => SurahWidget(
+              onTap: () {
+                showAdaptiveDialog(
+                  context: context,
+                  builder: (context) => CustomDialog(
+                    location: context.read<QuranCubit>().surs[index].place,
+                    nameInEng: context.read<QuranCubit>().surs[index].nameInEn,
+                    bookId: int.parse(tafseerTypeModel.id),
+                    surahId: index + 1,
+                    ayatNum: context.read<QuranCubit>().surs[index].ayatnum,
+                  ),
+                );
+              },
+              title: context.read<QuranCubit>().surs[index].nameInEn,
+              ayat: context.read<QuranCubit>().surs[index].ayatnum.toString(),
+              nameInArabic: context.read<QuranCubit>().surs[index].nameInAr,
+              place: context.read<QuranCubit>().surs[index].place,
+              num: index + 1,
+            ),
+            separatorBuilder: (context, index) =>
+                SizedBox(height: ScreenSize.hight * 0.02),
+            itemCount: context.read<QuranCubit>().surs.length,
+          ),
+        ],
       ),
     );
   }

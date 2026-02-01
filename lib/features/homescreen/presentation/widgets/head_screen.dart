@@ -81,7 +81,8 @@ class _HeadScreenState extends State<HeadScreen> {
                 MaterialButton(
                   onPressed: () {
                     BlocProvider.of<FetchprayerCubit>(context).getPrayers(
-                      zone: context.read<LocationCubit>().zone??"Africa/Cairo",
+                      zone:
+                          context.read<LocationCubit>().zone ?? "Africa/Cairo",
                       city: context.read<LocationCubit>().loction.toString(),
                       country: context.read<LocationCubit>().address.toString(),
                     );
@@ -103,7 +104,7 @@ class _HeadScreenState extends State<HeadScreen> {
                         .keys
                         .first,
                     style: TextStyle(
-                      color: Theme.of(context).primaryColor,
+                      color: Color(0xffbfa27e),
                       fontWeight: FontWeight.bold,
                       fontFamily: FontsGuid.poppins,
                       fontSize: ScreenSize.hight * 0.025,
@@ -122,7 +123,7 @@ class _HeadScreenState extends State<HeadScreen> {
                 onPressed: () {
                   BlocProvider.of<NextprayCubit>(context).getTheNext(
                     address: context.read<LocationCubit>().address.toString(),
-                    zone: context.read<LocationCubit>().zone??'Africa/Cairo'
+                    zone: context.read<LocationCubit>().zone ?? 'Africa/Cairo',
                   );
                   setState(() {});
                 },

@@ -21,7 +21,7 @@ class TafseerTypeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      shadowColor: Theme.of(context).primaryColor,
+      shadowColor: Color(0xffbfa27e),
       elevation: 6,
       borderRadius: BorderRadius.circular(25),
       child: ListTile(
@@ -34,7 +34,7 @@ class TafseerTypeWidget extends StatelessWidget {
               "assets/images/muslim (1) 1.png",
               width: ScreenSize.width * 0.12,
               height: ScreenSize.hight * 0.1,
-              color: Theme.of(context).primaryColor,
+              color: Color(0xffbfa27e),
               fit: BoxFit.fill,
             ),
             Text(

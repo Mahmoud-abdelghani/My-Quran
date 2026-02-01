@@ -24,6 +24,7 @@ class ParyWidget extends StatelessWidget {
             icondescription,
             width: ScreenSize.width * 0.13,
             height: ScreenSize.hight * 0.05,
+            color: Color.fromARGB(255, 212, 212, 212),
             fit: BoxFit.cover,
           ),
           SizedBox(
@@ -33,7 +34,7 @@ class ParyWidget extends StatelessWidget {
               child: Text(
                 name,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Color.fromARGB(255, 212, 212, 212),
                   fontSize: ScreenSize.hight * 0.03,
                   fontFamily: FontsGuid.poppins,
                   fontWeight: FontWeight.bold,
@@ -44,7 +45,7 @@ class ParyWidget extends StatelessWidget {
           Text(
             time,
             style: TextStyle(
-              color: Colors.white,
+              color: Color.fromARGB(255, 212, 212, 212),
               fontSize: ScreenSize.hight * 0.03,
               fontFamily: FontsGuid.poppins,
               fontWeight: FontWeight.bold,

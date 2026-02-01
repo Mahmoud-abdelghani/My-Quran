@@ -1,3 +1,4 @@
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,9 +25,10 @@ class _NextPrayDetailsState extends State<NextPrayDetails> {
       body: Stack(
         children: [
           Image.asset(
-            "assets/images/image 12.png",
+            "assets/images/vertical-shot-hassan-ii-mosque-casablanca-morocco.png",
             width: ScreenSize.width,
-            height: ScreenSize.hight * 0.49,
+            height: ScreenSize.hight,
+
             fit: BoxFit.cover,
           ),
           Column(
@@ -36,7 +38,7 @@ class _NextPrayDetailsState extends State<NextPrayDetails> {
               Text(
                 '${context.read<NextprayCubit>().nextdayModel!.nextPray.keys.first}  ${context.read<NextprayCubit>().nextdayModel!.nextPray[context.read<NextprayCubit>().nextdayModel!.nextPray.keys.first]}',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Color.fromARGB(255, 212, 212, 212),
                   fontFamily: FontsGuid.poppins,
                   fontWeight: FontWeight.bold,
                   fontSize: ScreenSize.hight * 0.035,
@@ -48,7 +50,7 @@ class _NextPrayDetailsState extends State<NextPrayDetails> {
                 height: ScreenSize.hight * 0.074,
                 width: ScreenSize.width * 0.816,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: const Color.fromARGB(167, 255, 255, 255),
                   borderRadius: BorderRadius.circular(ScreenSize.hight * 0.1),
                 ),
                 child: Text(
@@ -69,33 +71,62 @@ class _NextPrayDetailsState extends State<NextPrayDetails> {
                       ),
                     );
                   } else if (state is FetchprayerSuccess) {
-                    
-                    return Expanded(
-                      child: ListView.builder(
-                        itemCount: state.prayers.prayers.length,
-                        itemBuilder: (context, index) {
-                          if (context.read<FetchprayerCubit>().prayers.contains(
-                            state.prayers.prayers[index].name,
-                          )) {
-                            return ParyWidget(
-                              icondescription: index < 3
-                                  ? context
-                                        .read<FetchprayerCubit>()
-                                        .timesIcons[2]
-                                  : index > 2 && index < 4
-                                  ? context
-                                        .read<FetchprayerCubit>()
-                                        .timesIcons[1]
-                                  : context
-                                        .read<FetchprayerCubit>()
-                                        .timesIcons[0],
-                              name: state.prayers.prayers[index].name,
-                              time: state.prayers.prayers[index].time,
-                            );
-                          } else {
-                            return SizedBox(height: 0, width: 0);
-                          }
-                        },
+                    return Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: ScreenSize.hight * 0.05,
+                        horizontal: ScreenSize.width * 0.03,
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(
+                          ScreenSize.hight * 0.05,
+                        ),
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                              vertical: ScreenSize.hight * 0.05,
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Color(0xffE2BE7F)),
+                              borderRadius: BorderRadius.circular(
+                                ScreenSize.hight * 0.05,
+                              ),
+                              color: Colors.transparent,
+                            ),
+                            width: ScreenSize.width,
+                            height: ScreenSize.hight * 0.4,
+
+                            child: ListView.builder(
+                              itemCount: state.prayers.prayers.length,
+                              itemBuilder: (context, index) {
+                                if (context
+                                    .read<FetchprayerCubit>()
+                                    .prayers
+                                    .contains(
+                                      state.prayers.prayers[index].name,
+                                    )) {
+                                  return ParyWidget(
+                                    icondescription: index < 3
+                                        ? context
+                                              .read<FetchprayerCubit>()
+                                              .timesIcons[2]
+                                        : index > 2 && index < 4
+                                        ? context
+                                              .read<FetchprayerCubit>()
+                                              .timesIcons[1]
+                                        : context
+                                              .read<FetchprayerCubit>()
+                                              .timesIcons[0],
+                                    name: state.prayers.prayers[index].name,
+                                    time: state.prayers.prayers[index].time,
+                                  );
+                                } else {
+                                  return SizedBox(height: 0, width: 0);
+                                }
+                              },
+                            ),
+                          ),
+                        ),
                       ),
                     );
                   } else {

@@ -81,7 +81,7 @@ class _SephaWidgetState extends State<SephaWidget> {
                 ),
                 child: Text(
                   'إِعَادَةٌ',
-                  style: TextStyle(color: Theme.of(context).primaryColor),
+                  style: TextStyle(color: Color(0xffbfa27e)),
                 ),
               ),
               Spacer(flex: 2),

@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
 import 'package:quran/core/api/api_concumer.dart';
 import 'package:quran/core/api/end_points.dart';
@@ -13,13 +16,22 @@ class TafseerCubit extends Cubit<TafseerState> {
   getTafssersTypes() async {
     try {
       emit(TafseerTypesLoading());
-      final List<dynamic> listOfJsons = await api.get(
-        EndPoints.fetchTafsserTypes,
-      );
-      List<TafseerTypeModel> types = List.generate(
-        listOfJsons.length,
-        (index) => TafseerTypeModel.fromJson(listOfJsons[index]),
-      );
+      List<TafseerTypeModel> types = [];
+      Box tafseerBox = await Hive.openBox('tafseerBox');
+      if (tafseerBox.isEmpty) {
+        final List<dynamic> listOfJsons = await api.get(
+          EndPoints.fetchTafsserTypes,
+        );
+        types = List.generate(
+          listOfJsons.length,
+          (index) => TafseerTypeModel.fromJson(listOfJsons[index]),
+        );
+        await tafseerBox.addAll(types);
+      } else {
+        log('tafseer from hive');
+        types = tafseerBox.values.toList().cast<TafseerTypeModel>();
+      }
+
       emit(TafseerTypesSuccess(tafseerBooks: types));
     } on ServerException catch (e) {
       emit(TafseerTypesError(message: e.errorModel.errorMessage));

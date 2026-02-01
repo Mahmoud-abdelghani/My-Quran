@@ -18,74 +18,65 @@ class _MyCustomSettingsDialogState extends State<MyCustomSettingsDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          spacing: ScreenSize.hight * 0.05,
-          children: [
-            Text(
-              'Settings',
-              style: TextStyle(
-                color: Theme.of(context).primaryColor,
-                fontSize: ScreenSize.hight * 0.035,
-                fontWeight: FontWeight.bold,
-                fontFamily: FontsGuid.poppins,
-              ),
-            ),
-            Text(
-              "Themeing:",
-              style: TextStyle(
-                color: Theme.of(context).primaryColorDark,
-                fontSize: ScreenSize.hight * 0.024,
-                fontWeight: FontWeight.bold,
-                fontFamily: FontsGuid.poppins,
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+      child: Stack(
+        children: [
+          Image.asset('assets/images/Shape-07.png'),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              spacing: ScreenSize.hight * 0.05,
               children: [
                 Text(
-                  'Theme:',
+                  'Settings',
                   style: TextStyle(
-                    color: Theme.of(context).primaryColorDark,
-                    fontSize: ScreenSize.hight * 0.022,
+                    color: Theme.of(context).primaryColor,
+                    fontSize: ScreenSize.hight * 0.035,
                     fontWeight: FontWeight.bold,
                     fontFamily: FontsGuid.poppins,
                   ),
                 ),
-                IconButton(
-                  onPressed: () {
-                    context.read<ThemeCubit>().toggleMode();
-                  },
-                  icon: BlocBuilder<ThemeCubit, ThemeMode>(
-                    builder: (context, state) {
-                      return Icon(
-                        state == ThemeMode.light
-                            ? Icons.dark_mode
-                            : Icons.light_mode,
-                        color: Theme.of(context).primaryColorDark,
-                        size: ScreenSize.hight * 0.04,
-                      );
-                    },
+                Text(
+                  "Themeing:",
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColorDark,
+                    fontSize: ScreenSize.hight * 0.024,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: FontsGuid.poppins,
                   ),
                 ),
-              ],
-            ),
-            Text(
-              "Notifications:",
-              style: TextStyle(
-                color: Theme.of(context).primaryColorDark,
-                fontSize: ScreenSize.hight * 0.023,
-                fontWeight: FontWeight.bold,
-                fontFamily: FontsGuid.poppins,
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      'Theme:',
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColorDark,
+                        fontSize: ScreenSize.hight * 0.022,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: FontsGuid.poppins,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        context.read<ThemeCubit>().toggleMode();
+                      },
+                      icon: BlocBuilder<ThemeCubit, ThemeMode>(
+                        builder: (context, state) {
+                          return Icon(
+                            state == ThemeMode.light
+                                ? Icons.dark_mode
+                                : Icons.light_mode,
+                            color: Theme.of(context).primaryColorDark,
+                            size: ScreenSize.hight * 0.04,
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
                 Text(
-                  'الصَّلَاةُ عَلَى النَّبِيِّ:',
+                  "Notifications:",
                   style: TextStyle(
                     color: Theme.of(context).primaryColorDark,
                     fontSize: ScreenSize.hight * 0.023,
@@ -93,35 +84,52 @@ class _MyCustomSettingsDialogState extends State<MyCustomSettingsDialog> {
                     fontFamily: FontsGuid.poppins,
                   ),
                 ),
-                BlocBuilder<NotificationMemoryCubit, bool>(
-                  builder: (context, state) {
-                    return TextButton(
-                      onPressed: () async {
-                        BlocProvider.of<NotificationMemoryCubit>(
-                          context,
-                        ).toggleNotifications();
-                        if (!state) {
-                          await LocalNotificationService()
-                              .cancelNotificationById(10);
-                        }
-                      await  CacheHelper.storeString('avilable', state.toString());
-                      },
-                      child: Text(
-                        state ? "إِيقَافٌ" : "تَشْغِيلٌ",
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColorDark,
-                          fontSize: ScreenSize.hight * 0.023,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: FontsGuid.poppins,
-                        ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      'الصَّلَاةُ عَلَى النَّبِيِّ:',
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColorDark,
+                        fontSize: ScreenSize.hight * 0.023,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: FontsGuid.poppins,
                       ),
-                    );
-                  },
+                    ),
+                    BlocBuilder<NotificationMemoryCubit, bool>(
+                      builder: (context, state) {
+                        return TextButton(
+                          onPressed: () async {
+                            BlocProvider.of<NotificationMemoryCubit>(
+                              context,
+                            ).toggleNotifications();
+                            if (!state) {
+                              await LocalNotificationService()
+                                  .cancelNotificationById(10);
+                            }
+                            await CacheHelper.storeString(
+                              'avilable',
+                              state.toString(),
+                            );
+                          },
+                          child: Text(
+                            state ? "إِيقَافٌ" : "تَشْغِيلٌ",
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColorDark,
+                              fontSize: ScreenSize.hight * 0.023,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: FontsGuid.poppins,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

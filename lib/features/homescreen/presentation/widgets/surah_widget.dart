@@ -22,7 +22,7 @@ class SurahWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       elevation: 6,
-      shadowColor: Theme.of(context).primaryColor,
+      shadowColor: Color(0xffbfa27e),
       borderRadius: BorderRadius.circular(25),
       child: ListTile(
         minVerticalPadding: ScreenSize.hight * 0.01,
@@ -40,7 +40,7 @@ class SurahWidget extends StatelessWidget {
               "assets/images/muslim (1) 1.png",
               width: ScreenSize.width * 0.12,
               height: ScreenSize.hight * 0.1,
-              color: Theme.of(context).primaryColor,
+              color: Color(0xffbfa27e),
               fit: BoxFit.fill,
             ),
             Text(
@@ -53,7 +53,7 @@ class SurahWidget extends StatelessWidget {
           ],
         ),
         subtitle: Text(
-          '$place , $ayat AYAT',
+          ayat != '' ? '$place , $ayat AYAT' : place,
           style: TextStyle(fontSize: ScreenSize.hight * 0.018),
         ),
         trailing: Text(

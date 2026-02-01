@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
@@ -14,13 +16,17 @@ class AudioPlayerCubit extends Cubit<AudioPlayerState> {
   String qaree = "Yasser Al Dosari";
 
   playAudio(String url, String currenQaree) async {
-    urlGeneral = url;
-    await player.play(UrlSource(url));
-    duration = await player.getDuration() ?? Duration(seconds: 2);
-    isPlaying = true;
-    firstTime = false;
-    qaree = currenQaree;
-    emit(AudioPlayerPlaying());
+    try {
+      urlGeneral = url;
+      await player.play(UrlSource(url));
+      duration = await player.getDuration() ?? Duration(seconds: 2);
+      isPlaying = true;
+      firstTime = false;
+      qaree = currenQaree;
+      emit(AudioPlayerPlaying());
+    } on Exception catch (e) {
+      log(e.toString());
+    }
   }
 
   pauseAudio() {
@@ -34,6 +40,6 @@ class AudioPlayerCubit extends Cubit<AudioPlayerState> {
   }
 
   resume() {
-    playAudio(urlGeneral!,qaree);
+    playAudio(urlGeneral!, qaree);
   }
 }

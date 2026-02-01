@@ -25,7 +25,7 @@ class _AzkarWidgetState extends State<AzkarWidget> {
   Widget build(BuildContext context) {
     return Material(
       elevation: 6,
-      shadowColor: Theme.of(context).primaryColor,
+      shadowColor: Color(0xffbfa27e),
       borderRadius: BorderRadius.circular(25),
       child: GestureDetector(
         onTap: () {
@@ -40,7 +40,7 @@ class _AzkarWidgetState extends State<AzkarWidget> {
             widget.title,
             style: TextStyle(
               fontSize: ScreenSize.hight * 0.028,
-              color: Theme.of(context).primaryColorDark,
+              color: Theme.of(context).primaryColor,
             ),
           ),
           leading: Stack(
@@ -50,7 +50,7 @@ class _AzkarWidgetState extends State<AzkarWidget> {
                 "assets/images/muslim (1) 1.png",
                 width: ScreenSize.width * 0.12,
                 height: ScreenSize.hight * 0.1,
-                color: Theme.of(context).primaryColor,
+                color: Color(0xffbfa27e),
                 fit: BoxFit.fill,
               ),
               Text(
@@ -70,7 +70,7 @@ class _AzkarWidgetState extends State<AzkarWidget> {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: ScreenSize.hight * 0.018,
-                    color: Theme.of(context).primaryColor,
+                    color: Color(0xffbfa27e),
                     fontFamily: FontsGuid.quranFont,
                   ),
                 )
@@ -91,7 +91,7 @@ class _AzkarWidgetState extends State<AzkarWidget> {
               widget.zekr,
               style: TextStyle(
                 fontSize: ScreenSize.hight * 0.018,
-                color: Theme.of(context).primaryColor,
+                color: Color(0xffbfa27e),
                 fontFamily: FontsGuid.quranFont,
               ),
             ),

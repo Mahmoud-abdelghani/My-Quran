@@ -6,101 +6,86 @@ class AyaWidget extends StatelessWidget {
   const AyaWidget({
     super.key,
     required this.ayaAr,
-    required this.ayaEn,
+    this.ayaEn,
     required this.num,
     required this.tafseer,
   });
   final int num;
   final String ayaAr;
-  final String ayaEn;
+  final String? ayaEn;
   final bool tafseer;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.transparent,
+      margin: EdgeInsets.symmetric(
+        horizontal: ScreenSize.width * 0.03,
+        vertical: ScreenSize.hight * 0.005,
+      ),
+
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: Color.fromARGB(26, 191, 162, 126),
+        boxShadow: [
+          BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(2, 2)),
+        ],
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Center(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(ScreenSize.hight * 0.05),
-                color: Theme.of(context).secondaryHeaderColor,
-              ),
-              height: ScreenSize.hight * 0.07,
-              width: ScreenSize.width * 0.9,
-              child: Row(
+          Padding(
+            padding: EdgeInsets.only(
+              right: ScreenSize.width * 0.03,
+              top: ScreenSize.hight * 0.015,
+              bottom: ScreenSize.hight * 0.015,
+            ),
+            child: RichText(
+              textDirection: TextDirection.rtl,
+              text: TextSpan(
                 children: [
-                  SizedBox(width: ScreenSize.width * 0.034),
-                  CircleAvatar(
-                    radius: ScreenSize.hight * 0.023,
-                    backgroundColor: Theme.of(context).primaryColor,
-                    child: Text(
-                      num.toString(),
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColorLight,
-                        fontFamily: FontsGuid.poppins,
-                        fontWeight: FontWeight.bold,
-                        fontSize: ScreenSize.hight * 0.022,
-                      ),
+                  TextSpan(
+                    text: ayaAr,
+
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColorDark,
+                      fontSize: ScreenSize.hight * 0.035,
+                      fontFamily: FontsGuid.quranFont,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
-                  Spacer(),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.share,
-                        color: Theme.of(context).primaryColor,
-                        size: ScreenSize.hight * 0.035,
-                      ),
-                      Icon(
-                        Icons.play_arrow_outlined,
-                        color: Theme.of(context).primaryColor,
-                        size: ScreenSize.hight * 0.05,
-                      ),
-                      Icon(
-                        Icons.bookmark_border,
-                        color: Theme.of(context).primaryColor,
-                        size: ScreenSize.hight * 0.035,
-                      ),
-                    ],
+                  TextSpan(
+                    text: " \u06DD${num.toArabicDigits()}",
+                    style: TextStyle(
+                      color: Color(0xffbfa27e),
+                      fontSize: ScreenSize.hight * 0.035,
+                      fontFamily: FontsGuid.quranFont,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
-                  SizedBox(width: ScreenSize.width * 0.034),
                 ],
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(right: ScreenSize.width * 0.03),
-            child: Text(
-              ayaAr,
-              textAlign: TextAlign.right,
-              style: TextStyle(
-                color: Theme.of(context).primaryColorDark,
-                fontSize: ScreenSize.hight * 0.04,
-                fontFamily: FontsGuid.quranFont,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: ScreenSize.width * 0.03),
-            child: Text(
-              ayaEn,
-              textAlign: tafseer ? TextAlign.right : TextAlign.left,
-              style: TextStyle(
-                color: Theme.of(context).primaryColorDark,
-
-                fontSize: ScreenSize.hight * 0.025,
-                fontFamily: FontsGuid.quranFont,
-                fontWeight: FontWeight.w400,
-              ),
+          Text(
+            tafseer ? "\"$ayaEn\"" : "",
+            textAlign: TextAlign.start,
+            textDirection: TextDirection.rtl,
+            style: TextStyle(
+              color: Theme.of(context).primaryColorDark,
+              fontSize: ScreenSize.hight * 0.028,
+              fontFamily: FontsGuid.quranFont,
+              fontWeight: FontWeight.w400,
             ),
           ),
         ],
       ),
     );
+  }
+}
+
+extension ArabicNumbers on int {
+  String toArabicDigits() {
+    const arabicNumbers = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+    return toString().split('').map((e) => arabicNumbers[int.parse(e)]).join();
   }
 }

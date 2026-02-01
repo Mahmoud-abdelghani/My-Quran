@@ -1,5 +1,3 @@
-
-
 class EndPoints {
   static const String baseUrlTimes =
       "https://api.aladhan.com/v1/nextPrayerByAddress/";
@@ -15,6 +13,9 @@ class EndPoints {
   static const String baseUrlTafseer = "http://api.quran-tafseer.com/";
   static const String fetchTafsserTypes = "tafseer/";
   static const String fetchAyaTafseer = "quran/";
+
+  static const String baseUrlQeraat = 'https://www.mp3quran.net/';
+  static const String fetchAllSheook = 'api/v3/reciters';
 }
 
 class ApiKeys {
@@ -46,5 +47,8 @@ class ApiKeys {
   static const String bookName = "book_name";
   static const String author = 'author';
   static const String ayahNumber = "ayah_number";
-  static const text = 'text';
+  static const String text = 'text';
+  static const String server = 'server';
+  static const String moshaf = 'moshaf';
+  static const String reciters = 'reciters';
 }

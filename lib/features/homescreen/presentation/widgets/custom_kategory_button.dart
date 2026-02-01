@@ -37,7 +37,7 @@ class CustomKategoryButton extends StatelessWidget {
         style: TextStyle(
           color: selected
               ? Theme.of(context).primaryColorLight
-              : Theme.of(context).primaryColor,
+              : Color(0xffbfa27e),
           fontSize: ScreenSize.hight * 0.016,
           fontWeight: FontWeight.bold,
           fontFamily: FontsGuid.poppins,

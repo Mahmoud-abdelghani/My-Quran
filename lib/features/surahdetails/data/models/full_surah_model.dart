@@ -26,4 +26,7 @@ class FullSurahModel {
       translation: json[ApiKeys.revelationPlace],
     );
   }
+  set ayatInAr(List<dynamic> value) {
+    ayatInAr = value;
+  }
 }

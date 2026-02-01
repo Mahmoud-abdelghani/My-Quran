@@ -9,6 +9,7 @@ import 'package:quran/features/homescreen/presentation/widgets/compass_widget.da
 import 'package:quran/features/homescreen/presentation/widgets/custom_kategory_button.dart';
 import 'package:quran/features/homescreen/presentation/widgets/head_screen.dart';
 import 'package:quran/features/homescreen/presentation/widgets/sepha_widget.dart';
+import 'package:quran/features/homescreen/presentation/widgets/sounds_lib.dart';
 import 'package:quran/features/homescreen/presentation/widgets/surat_widget.dart';
 import 'package:quran/features/homescreen/presentation/widgets/tafser_widget.dart';
 import 'package:quran/features/surahdetails/presentation/cubit/audio_player_cubit.dart';
@@ -43,10 +44,11 @@ class _HomeViewState extends State<HomeView> {
   }
 
   ScrollController scrollController = ScrollController();
-  List<bool> buttonsStates = [true, false, false, false, false, false];
+  List<bool> buttonsStates = [true, false, false, false, false, false, false];
   List<String> buttonsTexts = [
     'السُّوَرُ',
     'التَّفْسِيرُ',
+    'مَكْتَبَةُ الصَّوْتِ',
     'القِبْلَةُ',
     'التَّسْبِيحُ',
     'أذْكَارُ الصَّبَاحِ',
@@ -76,38 +78,48 @@ class _HomeViewState extends State<HomeView> {
                   },
 
                   child: context.read<AudioPlayerCubit>().isPlaying!
-                      ? Icon(Icons.pause,color: Theme.of(context).primaryColorDark,)
-                      : Icon(Icons.play_arrow,color:  Theme.of(context).primaryColorDark),
+                      ? Icon(
+                          Icons.pause,
+                          color: Theme.of(context).primaryColorDark,
+                        )
+                      : Icon(
+                          Icons.play_arrow,
+                          color: Theme.of(context).primaryColorDark,
+                        ),
                 ),
 
           body: Stack(
             children: [
               Positioned(
+                right: 0,
                 bottom: 0,
-                child: BlocBuilder<ThemeCubit, ThemeMode>(
-                  builder: (context, state) {
-                    return Image.asset(
-                      state == ThemeMode.light
-                          ? 'assets/images/backgrounf.png'
-                          : 'assets/images/backgrounfdark.png',
-                      width: ScreenSize.width,
-                      height: ScreenSize.hight * 0.4,
-                      fit: BoxFit.fill,
-                    );
-                  },
+                child: Image.asset(
+                  'assets/images/Shape-04.png',
+                  width: ScreenSize.width * 0.55,
+                  height: ScreenSize.hight * 0.5,
+                  fit: BoxFit.cover,
                 ),
               ),
-              BlocBuilder<ThemeCubit, ThemeMode>(
-                builder: (context, state) {
-                  return Image.asset(
-                    state == ThemeMode.light
-                        ? 'assets/images/BG Mobile.png'
-                        : 'assets/images/BG Mobiledark.png',
-                    width: ScreenSize.width,
-                    height: ScreenSize.hight * 0.38,
-                    fit: BoxFit.fill,
-                  );
-                },
+
+              Positioned(
+                top: ScreenSize.hight * 0.3,
+                left: ScreenSize.width * 0.05,
+                right: ScreenSize.width * 0.7,
+                child: Image.asset(
+                  'assets/images/Glow.png',
+                  width: ScreenSize.width * 0.1,
+                  height: ScreenSize.hight * 0.4,
+
+                  fit: BoxFit.cover,
+                ),
+              ),
+
+              Image.asset(
+                'assets/images/Intersect.png',
+                width: ScreenSize.width,
+                height: ScreenSize.hight * 0.4,
+
+                fit: BoxFit.cover,
               ),
               Padding(
                 padding: EdgeInsets.only(left: ScreenSize.width * 0.03),
@@ -115,7 +127,7 @@ class _HomeViewState extends State<HomeView> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     HeadScreen(),
-                    SizedBox(height: ScreenSize.hight * .02),
+                    SizedBox(height: ScreenSize.hight * .03),
                     SizedBox(
                       width: ScreenSize.width,
                       height: ScreenSize.hight * 0.07,
@@ -135,6 +147,7 @@ class _HomeViewState extends State<HomeView> {
                                 false,
                                 false,
                                 false,
+                                false,
                               ];
                               buttonsStates[index] = true;
                             });
@@ -145,11 +158,13 @@ class _HomeViewState extends State<HomeView> {
                       ),
                     ),
                     if (buttonsStates.elementAt(0)) SuratWidget(),
-                    if (buttonsStates.elementAt(1)) TafserWidget(context2: context,),
-                    if (buttonsStates.elementAt(2)) CompassWidget(),
-                    if (buttonsStates.elementAt(3)) SephaWidget(),
-                    if (buttonsStates.elementAt(4)) AzkarSWidget(),
-                    if (buttonsStates.elementAt(5)) AzkarMWidget(),
+                    if (buttonsStates.elementAt(1))
+                      TafserWidget(context2: context),
+                    if (buttonsStates.elementAt(2)) SoundsLib(),
+                    if (buttonsStates.elementAt(3)) CompassWidget(),
+                    if (buttonsStates.elementAt(4)) SephaWidget(),
+                    if (buttonsStates.elementAt(5)) AzkarSWidget(),
+                    if (buttonsStates.elementAt(6)) AzkarMWidget(),
                   ],
                 ),
               ),
