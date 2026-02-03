@@ -1,11 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quran/core/database/cache_helper.dart';
 import 'package:quran/core/utils/fonts_guid.dart';
 import 'package:quran/core/utils/screen_size.dart';
 import 'package:quran/features/homescreen/presentation/cubit/quran_cubit.dart';
 
 import 'package:quran/features/surahdetails/presentation/cubit/full_surah_cubit.dart';
 import 'package:quran/features/surahdetails/presentation/widgets/aya_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SurahView extends StatefulWidget {
   const SurahView({super.key});
@@ -16,16 +20,59 @@ class SurahView extends StatefulWidget {
 }
 
 class _SurahViewState extends State<SurahView> {
+  final ScrollController scrollController = ScrollController();
+  late Map<String, dynamic> map;
+  bool _didScroll = false;
+
   @override
   Widget build(BuildContext context) {
-    int surahIndex = ModalRoute.of(context)!.settings.arguments as int;
+    map = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+
     return BlocBuilder<FullSurahCubit, FullSurahState>(
       builder: (context, state) {
+        if (state is FullSurahSuccess && !_didScroll) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (scrollController.hasClients) {
+              scrollController.jumpTo(map['offset']);
+              _didScroll = true;
+            }
+          });
+        }
+
         if (state is FullSurahLoading) {
-          return Scaffold(body: Center(child: CircularProgressIndicator()));
-        } else if (state is FullSurahSuccess) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
+
+        if (state is FullSurahSuccess) {
           return Scaffold(
+            floatingActionButton: FloatingActionButton.extended(
+              onPressed: () async {
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(const SnackBar(content: Text('تم حفظ العلامة')));
+
+                await CacheHelper.storeString(
+                  'Alama',
+                  scrollController.offset.toString(),
+                );
+                await CacheHelper.storeString(
+                  'SurahNum',
+                  map['surahId'].toString(),
+                );
+              },
+              label: Text(
+                'حفظ العلامة',
+                style: TextStyle(
+                  fontSize: ScreenSize.hight * 0.025,
+                  fontWeight: FontWeight.w400,
+                  color: Theme.of(context).primaryColorLight,
+                ),
+              ),
+            ),
             body: CustomScrollView(
+              controller: scrollController,
               slivers: [
                 SliverToBoxAdapter(
                   child: Padding(
@@ -34,7 +81,7 @@ class _SurahViewState extends State<SurahView> {
                       left: ScreenSize.width * 0.146,
                     ),
                     child: Text(
-                      'سورة ${context.read<QuranCubit>().surs[surahIndex - 1].nameInAr}',
+                      'سورة ${context.read<QuranCubit>().surs[map['surahId'] - 1].nameInAr}',
                       style: TextStyle(
                         color: Theme.of(context).primaryColor,
                         fontSize: ScreenSize.hight * 0.05,
@@ -89,11 +136,13 @@ class _SurahViewState extends State<SurahView> {
               ],
             ),
           );
-        } else if (state is FullSurahconnectionError) {
-          return Scaffold(body: Text(state.message));
-        } else {
-          return Scaffold(body: Text("error while loading"));
         }
+
+        if (state is FullSurahconnectionError) {
+          return Scaffold(body: Text(state.message));
+        }
+
+        return const Scaffold(body: Text("error while loading"));
       },
     );
   }

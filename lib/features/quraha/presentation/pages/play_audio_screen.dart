@@ -22,8 +22,24 @@ class _PlayAudioScreenState extends State<PlayAudioScreen> {
   Duration duration = Duration(seconds: 0);
   String qaree = "ياسر الدوسري";
   double value = 0.0;
+  bool _showAudioLoading = false;
 
   String? currentUrl;
+
+  late final DownloadCubit _downloadCubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _downloadCubit = context.read<DownloadCubit>();
+  }
+
+  @override
+  void dispose() {
+    _downloadCubit.cancelDownloading();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     currentUrl = context
@@ -52,7 +68,7 @@ class _PlayAudioScreenState extends State<PlayAudioScreen> {
 
                 Padding(
                   padding: EdgeInsets.symmetric(
-                    vertical: ScreenSize.hight * 0.04,
+                    vertical: ScreenSize.hight * 0.08,
                     horizontal: ScreenSize.width * 0.025,
                   ),
                   child: ClipRRect(
@@ -92,6 +108,9 @@ class _PlayAudioScreenState extends State<PlayAudioScreen> {
                                     if (!context
                                         .read<AudioPlayerCubit>()
                                         .isPlaying!) {
+                                      setState(() {
+                                        _showAudioLoading = true;
+                                      });
                                       await BlocProvider.of<AudioPlayerCubit>(
                                         context,
                                       ).playAudio(
@@ -144,10 +163,23 @@ class _PlayAudioScreenState extends State<PlayAudioScreen> {
                                   child: CircleAvatar(
                                     radius: ScreenSize.hight * 0.04,
                                     backgroundColor: Color(0xffE2BE7F),
-                                    child:
-                                        !context
-                                            .read<AudioPlayerCubit>()
-                                            .isPlaying!
+                                    child: _showAudioLoading
+                                        ? SizedBox(
+                                            width: ScreenSize.hight * 0.035,
+                                            height: ScreenSize.hight * 0.035,
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: 2.5,
+                                              color: Color.fromARGB(
+                                                255,
+                                                212,
+                                                212,
+                                                212,
+                                              ),
+                                            ),
+                                          )
+                                        : !context
+                                              .read<AudioPlayerCubit>()
+                                              .isPlaying!
                                         ? Icon(
                                             Icons.play_arrow,
                                             size: ScreenSize.hight * 0.05,
@@ -185,7 +217,18 @@ class _PlayAudioScreenState extends State<PlayAudioScreen> {
                                   .onPositionChanged,
                               builder: (context, snapshot) {
                                 final position = snapshot.data ?? Duration.zero;
-
+                                if (_showAudioLoading &&
+                                    position.inMilliseconds > 0) {
+                                  WidgetsBinding.instance.addPostFrameCallback((
+                                    _,
+                                  ) {
+                                    if (mounted) {
+                                      setState(() {
+                                        _showAudioLoading = false;
+                                      });
+                                    }
+                                  });
+                                }
                                 return Column(
                                   children: [
                                     Slider(
@@ -329,8 +372,10 @@ class _PlayAudioScreenState extends State<PlayAudioScreen> {
                                     url: currentUrl!,
                                     key: 'surah${suraIndex - 1}$qaree',
                                     onProgress: (progress) {
-                                      value = progress;
-                                      setState(() {});
+                                      if (!mounted) return;
+                                      setState(() {
+                                        value = progress;
+                                      });
                                     },
                                   );
                                 },
@@ -372,6 +417,9 @@ class _PlayAudioScreenState extends State<PlayAudioScreen> {
                             });
                       },
                       onSelected: (option) async {
+                        setState(() {
+                          _showAudioLoading = true;
+                        });
                         currentUrl = context
                             .read<QrahatCubit>()
                             .sheook!

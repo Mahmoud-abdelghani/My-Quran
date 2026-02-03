@@ -20,7 +20,11 @@ class _MyCustomSettingsDialogState extends State<MyCustomSettingsDialog> {
     return Dialog(
       child: Stack(
         children: [
-          Image.asset('assets/images/Shape-07.png'),
+          Positioned(
+            top: ScreenSize.hight * 0.025,
+            left: 0,
+            child: Image.asset('assets/images/Shape-07.png'),
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(

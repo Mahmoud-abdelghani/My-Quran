@@ -28,7 +28,11 @@ class _SuratWidgetState extends State<SuratWidget> {
                   BlocProvider.of<FullSurahCubit>(
                     context,
                   ).getFullSurah(index + 1);
-                  Navigator.pushNamed(context, SurahView.routeName,arguments: index + 1);
+                  Navigator.pushNamed(
+                    context,
+                    SurahView.routeName,
+                    arguments: {'surahId': index + 1, 'offset': 0.0},
+                  );
                 },
                 num: index + 1,
                 title: context.read<QuranCubit>().surs[index].nameInEn,

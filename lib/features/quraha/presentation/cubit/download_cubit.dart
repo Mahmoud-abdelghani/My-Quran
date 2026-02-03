@@ -12,6 +12,7 @@ part 'download_state.dart';
 
 class DownloadCubit extends Cubit<DownloadState> {
   DownloadCubit() : super(DownloadInitial());
+
   bool isDownloading = false;
   Future<void> downloadMp3WithDio({
     required String url,
@@ -20,10 +21,9 @@ class DownloadCubit extends Cubit<DownloadState> {
     required DownloadedSurahModel downloadedSurahModel,
   }) async {
     isDownloading = true;
+    final dio = Dio();
     final audioBox = await Hive.openBox('audioBox');
     final dataBox = await Hive.openBox('dataBox');
-
-    final dio = Dio();
 
     // ✅ استخدم documents directory
     final dir = await getApplicationDocumentsDirectory();
@@ -75,5 +75,17 @@ class DownloadCubit extends Cubit<DownloadState> {
     } on Exception catch (e) {
       emit(DownloadedSursFailure(e.toString()));
     }
+  }
+
+  cancelDownloading() {
+    isDownloading = false;
+  }
+
+  deleteSurah(String key, DownloadedSurahModel downloadedSurahModel) async {
+    Box audioBox = await Hive.openBox('audioBox');
+    Box dataBox = await Hive.openBox('dataBox');
+
+    await audioBox.delete(key);
+    await dataBox.deleteAt(downloadedSurs.indexOf(downloadedSurahModel));
   }
 }

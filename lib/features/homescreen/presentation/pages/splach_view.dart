@@ -58,14 +58,14 @@ class _SplachViewState extends State<SplachView> {
                     'assets/images/Shape-04.png',
                     width: ScreenSize.width * 0.55,
                     height: ScreenSize.hight * 0.5,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fill,
                   ),
                 ),
                 Image.asset(
                   'assets/images/Mosque-01.png',
                   width: ScreenSize.width,
-                  height: ScreenSize.hight * 0.3,
-                  fit: BoxFit.cover,
+                  height: ScreenSize.hight * 0.28,
+                  fit: BoxFit.fill,
                 ),
                 Center(
                   child: Column(

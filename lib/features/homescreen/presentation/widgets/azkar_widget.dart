@@ -39,7 +39,7 @@ class _AzkarWidgetState extends State<AzkarWidget> {
           title: Text(
             widget.title,
             style: TextStyle(
-              fontSize: ScreenSize.hight * 0.028,
+              fontSize: ScreenSize.hight * 0.03,
               color: Theme.of(context).primaryColor,
             ),
           ),
@@ -90,7 +90,7 @@ class _AzkarWidgetState extends State<AzkarWidget> {
             Text(
               widget.zekr,
               style: TextStyle(
-                fontSize: ScreenSize.hight * 0.018,
+                fontSize: ScreenSize.hight * 0.022,
                 color: Color(0xffbfa27e),
                 fontFamily: FontsGuid.quranFont,
               ),

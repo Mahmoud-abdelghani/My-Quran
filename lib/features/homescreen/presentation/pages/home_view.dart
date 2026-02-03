@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran/core/cubit/theme_cubit.dart';
+import 'package:quran/core/database/cache_helper.dart';
 import 'package:quran/core/services/local_notification_service.dart';
 import 'package:quran/core/utils/screen_size.dart';
 import 'package:quran/features/homescreen/presentation/widgets/azkar_m_widget.dart';
@@ -13,6 +14,8 @@ import 'package:quran/features/homescreen/presentation/widgets/sounds_lib.dart';
 import 'package:quran/features/homescreen/presentation/widgets/surat_widget.dart';
 import 'package:quran/features/homescreen/presentation/widgets/tafser_widget.dart';
 import 'package:quran/features/surahdetails/presentation/cubit/audio_player_cubit.dart';
+import 'package:quran/features/surahdetails/presentation/cubit/full_surah_cubit.dart';
+import 'package:quran/features/surahdetails/presentation/pages/surah_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -68,13 +71,39 @@ class _HomeViewState extends State<HomeView> {
       builder: (context, state) {
         return Scaffold(
           floatingActionButton: context.read<AudioPlayerCubit>().firstTime
-              ? null
+              ? FloatingActionButton.extended(
+                  onPressed: () async {
+                    int surahId = int.parse(
+                      CacheHelper.getString('SurahNum') ?? '1',
+                    );
+                    double offset = double.parse(
+                      CacheHelper.getString('Alama') ?? '0.0',
+                    );
+                    BlocProvider.of<FullSurahCubit>(
+                      context,
+                    ).getFullSurah(surahId);
+                    Navigator.pushNamed(
+                      context,
+                      SurahView.routeName,
+                      arguments: {'surahId': surahId, 'offset': offset},
+                    );
+                  },
+                  label: Text(
+                    'الرجوع للعلامة',
+                    style: TextStyle(
+                      fontSize: ScreenSize.hight * 0.025,
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context).primaryColorLight,
+                    ),
+                  ),
+                )
               : FloatingActionButton(
                   heroTag: null,
                   onPressed: () {
                     context.read<AudioPlayerCubit>().isPlaying!
                         ? context.read<AudioPlayerCubit>().pauseAudio()
                         : context.read<AudioPlayerCubit>().resume();
+                    setState(() {});
                   },
 
                   child: context.read<AudioPlayerCubit>().isPlaying!
@@ -97,7 +126,7 @@ class _HomeViewState extends State<HomeView> {
                   'assets/images/Shape-04.png',
                   width: ScreenSize.width * 0.55,
                   height: ScreenSize.hight * 0.5,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                 ),
               ),
 

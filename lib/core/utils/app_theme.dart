@@ -33,6 +33,7 @@ ThemeData lightTheme = ThemeData(
   primaryColorDark: Colors.black,
   secondaryHeaderColor: Color(0xfff9f5fd),
   dialogTheme: DialogThemeData(backgroundColor: Colors.white),
+  brightness: Brightness.light,
 );
 
 ThemeData darkTheme = ThemeData(
@@ -70,4 +71,5 @@ ThemeData darkTheme = ThemeData(
   primaryColorDark: Colors.white,
   secondaryHeaderColor: Color.fromARGB(189, 45, 0, 87),
   dialogTheme: DialogThemeData(backgroundColor: Color(0xff121212)),
+  brightness: Brightness.dark,
 );

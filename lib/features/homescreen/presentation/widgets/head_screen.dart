@@ -28,7 +28,7 @@ class _HeadScreenState extends State<HeadScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: ScreenSize.hight * 0.35,
+                  height: ScreenSize.hight * 0.3,
                   width: ScreenSize.width * 0.4,
                   child: Center(child: CircularProgressIndicator()),
                 ),

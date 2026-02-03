@@ -27,6 +27,7 @@ import 'package:quran/features/quraha/presentation/cubit/download_cubit.dart';
 import 'package:quran/features/quraha/presentation/cubit/qrahat_cubit.dart';
 import 'package:quran/features/quraha/presentation/pages/downloaded_surs_screen.dart';
 import 'package:quran/features/quraha/presentation/pages/play_audio_screen.dart';
+import 'package:quran/features/quraha/presentation/pages/play_downloaded_screen.dart';
 import 'package:quran/features/quraha/presentation/pages/surs_selsection_screen.dart';
 import 'package:quran/features/surahdetails/data/models/full_surah_model_type_adaptive.dart';
 import 'package:quran/features/surahdetails/data/models/shek_model_type_adapter.dart';
@@ -139,6 +140,7 @@ class MyApp extends StatelessWidget {
                   SursSelsectionScreen(),
               PlayAudioScreen.routeName: (context) => PlayAudioScreen(),
               DownloadedSursScreen.routeName: (context) => DownloadedSursScreen(),
+              PlayDownloadedScreen.routeName:(context)=>PlayDownloadedScreen()
             },
             initialRoute: SplachView.routeName,
             theme: lightTheme,
