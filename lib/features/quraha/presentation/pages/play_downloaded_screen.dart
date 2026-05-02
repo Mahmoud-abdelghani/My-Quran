@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran/core/utils/fonts_guid.dart';
 import 'package:quran/core/utils/screen_size.dart';
 import 'package:quran/features/quraha/data/models/downloaded_surah_model.dart';
-import 'package:quran/features/quraha/presentation/cubit/download_cubit.dart';
 import 'package:quran/features/surahdetails/presentation/cubit/audio_player_cubit.dart';
 
 class PlayDownloadedScreen extends StatefulWidget {
@@ -33,7 +32,7 @@ class _PlayDownloadedScreenState extends State<PlayDownloadedScreen> {
               alignment: Alignment.bottomCenter,
               children: [
                 Image.asset(
-                  'assets/images/taj-mahal-agra-india 1.png',
+                  'assets/images/taj-mahal-agra-india.png',
                   width: ScreenSize.width,
                   height: ScreenSize.hight,
                   fit: BoxFit.cover,

@@ -13,7 +13,7 @@ import 'package:quran/core/utils/app_theme.dart';
 import 'package:quran/features/homescreen/data/models/surah_model_type_adaptive.dart';
 import 'package:quran/features/homescreen/data/models/tafseer_type_type_adapter.dart';
 import 'package:quran/features/homescreen/data/models/zekr_model_type_adapter.dart';
-
+import 'package:quran/features/homescreen/presentation/cubit/haj_handler_cubit.dart';
 import 'package:quran/features/homescreen/presentation/cubit/location_cubit.dart';
 import 'package:quran/features/homescreen/presentation/cubit/nextpray_cubit.dart';
 import 'package:quran/features/homescreen/presentation/cubit/quran_cubit.dart';
@@ -64,6 +64,7 @@ insureNotificationsPermissions() async {
   if (status.isDenied || status.isLimited || status.isPermanentlyDenied) {
     final request = await Permission.notification.request();
     if (request.isPermanentlyDenied) {
+
       await openAppSettings();
     }
   }
@@ -123,6 +124,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         BlocProvider(create: (context) => DownloadCubit()),
+        BlocProvider(create: (context) => HajHandlerCubit()),
       ],
 
       child: BlocBuilder<ThemeCubit, ThemeMode>(
@@ -139,8 +141,10 @@ class MyApp extends StatelessWidget {
               SursSelsectionScreen.routeName: (context) =>
                   SursSelsectionScreen(),
               PlayAudioScreen.routeName: (context) => PlayAudioScreen(),
-              DownloadedSursScreen.routeName: (context) => DownloadedSursScreen(),
-              PlayDownloadedScreen.routeName:(context)=>PlayDownloadedScreen()
+              DownloadedSursScreen.routeName: (context) =>
+                  DownloadedSursScreen(),
+              PlayDownloadedScreen.routeName: (context) =>
+                  PlayDownloadedScreen(),
             },
             initialRoute: SplachView.routeName,
             theme: lightTheme,

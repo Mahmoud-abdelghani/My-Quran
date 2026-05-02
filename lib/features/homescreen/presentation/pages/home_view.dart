@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quran/core/cubit/theme_cubit.dart';
 import 'package:quran/core/database/cache_helper.dart';
 import 'package:quran/core/services/local_notification_service.dart';
 import 'package:quran/core/utils/screen_size.dart';
@@ -8,11 +7,13 @@ import 'package:quran/features/homescreen/presentation/widgets/azkar_m_widget.da
 import 'package:quran/features/homescreen/presentation/widgets/azkar_s_widget.dart';
 import 'package:quran/features/homescreen/presentation/widgets/compass_widget.dart';
 import 'package:quran/features/homescreen/presentation/widgets/custom_kategory_button.dart';
+import 'package:quran/features/homescreen/presentation/widgets/el_hag_widget.dart';
 import 'package:quran/features/homescreen/presentation/widgets/head_screen.dart';
 import 'package:quran/features/homescreen/presentation/widgets/sepha_widget.dart';
 import 'package:quran/features/homescreen/presentation/widgets/sounds_lib.dart';
 import 'package:quran/features/homescreen/presentation/widgets/surat_widget.dart';
 import 'package:quran/features/homescreen/presentation/widgets/tafser_widget.dart';
+import 'package:quran/features/homescreen/presentation/widgets/waiting_arafa.dart';
 import 'package:quran/features/surahdetails/presentation/cubit/audio_player_cubit.dart';
 import 'package:quran/features/surahdetails/presentation/cubit/full_surah_cubit.dart';
 import 'package:quran/features/surahdetails/presentation/pages/surah_view.dart';
@@ -47,7 +48,16 @@ class _HomeViewState extends State<HomeView> {
   }
 
   ScrollController scrollController = ScrollController();
-  List<bool> buttonsStates = [true, false, false, false, false, false, false];
+  List<bool> buttonsStates = [
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ];
   List<String> buttonsTexts = [
     'السُّوَرُ',
     'التَّفْسِيرُ',
@@ -56,6 +66,7 @@ class _HomeViewState extends State<HomeView> {
     'التَّسْبِيحُ',
     'أذْكَارُ الصَّبَاحِ',
     'أَذْكَارُ الْمَسَاءِ',
+    'موسم الحج',
   ];
   @override
   void initState() {
@@ -70,7 +81,9 @@ class _HomeViewState extends State<HomeView> {
     return BlocBuilder<AudioPlayerCubit, AudioPlayerState>(
       builder: (context, state) {
         return Scaffold(
-          floatingActionButton: context.read<AudioPlayerCubit>().firstTime
+          floatingActionButton: buttonsStates[7]
+              ? null
+              : context.read<AudioPlayerCubit>().firstTime
               ? FloatingActionButton.extended(
                   onPressed: () async {
                     int surahId = int.parse(
@@ -129,20 +142,6 @@ class _HomeViewState extends State<HomeView> {
                   fit: BoxFit.fill,
                 ),
               ),
-
-              Positioned(
-                top: ScreenSize.hight * 0.3,
-                left: ScreenSize.width * 0.05,
-                right: ScreenSize.width * 0.7,
-                child: Image.asset(
-                  'assets/images/Glow.png',
-                  width: ScreenSize.width * 0.1,
-                  height: ScreenSize.hight * 0.4,
-
-                  fit: BoxFit.cover,
-                ),
-              ),
-
               Image.asset(
                 'assets/images/Intersect.png',
                 width: ScreenSize.width,
@@ -167,9 +166,10 @@ class _HomeViewState extends State<HomeView> {
                         separatorBuilder: (context, index) =>
                             SizedBox(width: ScreenSize.width * 0.05),
                         itemBuilder: (context, index) => CustomKategoryButton(
-                          ontap: () {
+                          ontap: () async {
                             setState(() {
                               buttonsStates = [
+                                false,
                                 false,
                                 false,
                                 false,
@@ -194,6 +194,15 @@ class _HomeViewState extends State<HomeView> {
                     if (buttonsStates.elementAt(4)) SephaWidget(),
                     if (buttonsStates.elementAt(5)) AzkarSWidget(),
                     if (buttonsStates.elementAt(6)) AzkarMWidget(),
+                    if (buttonsStates.elementAt(7) &&
+                            DateTime.now().month >= 5 &&
+                            DateTime.now().month < 6 ||
+                        (true && buttonsStates.elementAt(7)))
+                      ElHagWidget()
+                    else if (buttonsStates.elementAt(7) &&
+                        !(DateTime.now().month >= 5 &&
+                            DateTime.now().month < 6))
+                      WaitingArafa(hajjContentAvailable: false, targetMonth: 5),
                   ],
                 ),
               ),

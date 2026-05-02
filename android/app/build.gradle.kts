@@ -24,8 +24,8 @@ android {
         applicationId = "com.mahmoud.quran"
         minSdk = flutter.minSdkVersion
         targetSdk = 35
-        versionCode = 3
-        versionName = "1.0.0"
+        versionCode = 7
+        versionName = "3.0.2"
         multiDexEnabled = true
     }
 

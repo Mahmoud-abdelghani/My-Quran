@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +8,6 @@ import 'package:quran/features/homescreen/presentation/cubit/quran_cubit.dart';
 
 import 'package:quran/features/surahdetails/presentation/cubit/full_surah_cubit.dart';
 import 'package:quran/features/surahdetails/presentation/widgets/aya_widget.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SurahView extends StatefulWidget {
   const SurahView({super.key});

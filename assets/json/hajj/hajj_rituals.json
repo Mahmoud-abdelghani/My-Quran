@@ -1,0 +1,154 @@
+
+{
+  "version": "1.0.0",
+  "title": "Hajj Rituals Guide",
+  "language": "ar",
+  "description": "دليل مناسك الحج خطوة بخطوة",
+  "rituals": [
+    {
+      "order": 1,
+      "id": "ihram",
+      "title": "الإحرام",
+      "location": "الميقات",
+      "short_description": "نية الدخول في النسك ولبس الإحرام",
+      "steps": [
+        "الاغتسال والتطيب",
+        "لبس ملابس الإحرام",
+        "عقد نية الحج",
+        "بدء التلبية"
+      ],
+      "image": "assets/images/—Pngtree—flat hajj pilgrim walking with_20975771.png",
+      "dua": {
+        "arabic": "لبيك اللهم حجًا",
+        "transliteration": "Labbaik Allahumma Hajjan"
+      },
+      "audio_tag": "talbiyah"
+    },
+    {
+      "order": 2,
+      "id": "tawaf",
+      "title": "الطواف",
+      "location": "المسجد الحرام",
+      "short_description": "الطواف حول الكعبة سبعة أشواط",
+      "steps": [
+        "البدء من الحجر الأسود",
+        "الطواف 7 أشواط",
+        "الدعاء أثناء الطواف",
+        "الصلاة خلف مقام إبراهيم"
+      ],
+    "image": "assets/images/tawaf.png",
+
+      "dua": {
+        "arabic": "ربنا آتنا في الدنيا حسنة وفي الآخرة حسنة وقنا عذاب النار — يُقال في كل شوط بين الركن اليماني والحجر الأسود",
+        "transliteration": ""
+      },
+      "audio_tag": "dua_tawaf"
+    },
+    {
+      "order": 3,
+      "id": "sai",
+      "title": "السعي بين الصفا والمروة",
+      "location": "المسعى",
+      "short_description": "السعي سبعة أشواط",
+      "steps": [
+        "الصعود إلى الصفا",
+        "الدعاء",
+        "السعي إلى المروة",
+        "إكمال 7 أشواط"
+      ],
+          "image": "assets/images/mount-arafat (1).png",
+
+      "dua": {
+        "arabic": "إن الصفا والمروة من شعائر الله — تُقال في بداية السعي فقط عند أول مرة يرقى الصفا و يفعل على المروة كما فعل على الصفا من التوحيد والتكبير والدعاء — مع استقبال القبلة",
+        "transliteration": ""
+      }
+    },
+    {
+      "order": 4,
+      "id": "arafah",
+      "title": "يوم عرفة",
+      "location": "جبل عرفات",
+      "short_description": "أعظم يوم في الحج",
+      "steps": [
+        "الوقوف بعرفة",
+        "الإكثار من الدعاء",
+        "الذكر والتلبية",
+        "صلاة الظهر والعصر جمعًا"
+      ],
+        "image": "assets/images/mount-arafat.png",
+      "dua": {
+        "arabic": "لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير",
+        "transliteration": ""
+      },
+      "audio_tag": "arafah_dua"
+    },
+    {
+      "order": 5,
+      "id": "muzdalifah",
+      "title": "المبيت بمزدلفة",
+      "location": "مزدلفة",
+      "short_description": "جمع الحصى والمبيت",
+      "steps": [
+        "الانتقال إلى مزدلفة",
+        "جمع الحصى",
+        "المبيت حتى الفجر"
+      ],
+      "image": "assets/images/ChatGPT Image Apr 29, 2026, 06_37_15 PM.png",
+      "dua": {
+        "arabic": "يقف عند المشعر الحرام ويذكر الله والدعاء: «رب كما هديتنا وكنا من قبل ضالين». والاستغفار والتكبير",
+        "transliteration": ""
+      }
+    },
+    {
+      "order": 6,
+      "id": "ramy_jamarat",
+      "title": "رمي الجمرات",
+      "location": "منى",
+      "short_description": "رمي جمرة العقبة",
+      "steps": [
+        "التوجه إلى منى",
+        "رمي جمرة العقبة",
+        "التكبير مع كل حصاة"
+      ],
+        "image": "assets/images/ChatGPT Image Apr 29, 2026, 06_29_47 PM.png",
+      "dua": {
+        "arabic": "الله أكبر",
+        "transliteration": "Allahu Akbar"
+      }
+    },
+    {
+      "order": 7,
+      "id": "tawaf_ifadah",
+      "title": "طواف الإفاضة",
+      "location": "المسجد الحرام",
+      "short_description": "طواف من أركان الحج",
+      "steps": [
+        "الطواف 7 أشواط",
+        "الصلاة خلف المقام",
+        "الدعاء"
+      ],
+        "image": "assets/images/kaaba.png",
+         "dua": {
+        "arabic": "",
+        "transliteration": "Allahu Akbar"
+      }
+    },
+    {
+      "order": 8,
+      "id": "tawaf_wada",
+      "title": "طواف الوداع",
+      "location": "المسجد الحرام",
+      "short_description": "آخر طواف قبل مغادرة مكة",
+      "steps": [
+        "طواف 7 أشواط",
+        "الدعاء بالقبول",
+        "مغادرة مكة"
+      ],
+         "image": "assets/images/kaaba.png",
+         "dua": {
+        "arabic": "",
+        "transliteration": "Allahu Akbar"
+      }
+    }
+  ]
+}

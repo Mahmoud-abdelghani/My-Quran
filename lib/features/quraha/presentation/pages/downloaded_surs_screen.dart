@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran/core/utils/fonts_guid.dart';
 import 'package:quran/core/utils/screen_size.dart';
-import 'package:quran/features/homescreen/presentation/widgets/surah_widget.dart';
 import 'package:quran/features/quraha/presentation/cubit/download_cubit.dart';
 import 'package:quran/features/quraha/presentation/pages/play_downloaded_screen.dart';
 
@@ -263,6 +262,7 @@ class DownloadedSursScreen extends StatelessWidget {
 
                                               await BlocProvider.of<
                                                     DownloadCubit
+                                                  // ignore: use_build_context_synchronously
                                                   >(context)
                                                   .getDownloadedSurahs();
                                             },

@@ -20,13 +20,6 @@ class ParyWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Image.asset(
-            icondescription,
-            width: ScreenSize.width * 0.13,
-            height: ScreenSize.hight * 0.05,
-            color: Color.fromARGB(255, 212, 212, 212),
-            fit: BoxFit.cover,
-          ),
           SizedBox(
             height: ScreenSize.hight * 0.0419,
             width: ScreenSize.width * 0.33,

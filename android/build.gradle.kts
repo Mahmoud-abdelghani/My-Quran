@@ -6,7 +6,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:8.6.0")
+       classpath("com.android.tools.build:gradle:8.9.1")
         // لو الباكدج بتاعك للـ notifications بيحتاج Google services plugin ضيف السطر ده كمان:
         // classpath("com.google.gms:google-services:4.4.2")
     }
